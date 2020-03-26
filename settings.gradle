@@ -1,0 +1,2 @@
+rootProject.name='psycach_ktl'
+include ':app'
