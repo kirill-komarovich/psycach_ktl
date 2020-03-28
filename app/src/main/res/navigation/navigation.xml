@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/methodologies_list">
+    app:startDestination="@id/methodologies">
 
+    <fragment
+        android:id="@+id/methodologies"
+        android:name="com.psycach_ktl.fragments.MethodologiesFragment"
+        android:label="methodologies_fragment"
+        tools:layout="@layout/methodologies_fragment" />
 </navigation>

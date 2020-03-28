@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">psycach_ktl</string>
+    <string name="app_name" translatable="false">psycach_ktl</string>
+    <string name="san">Самочувствие, активность, настроение</string>
+    <string name="mental_states">Cамооценка психических состояний Айзенка</string>
+    <string name="jersild">Психические состояния личности Джерсайлда</string>
+    <string name="alarm_scale">Шкала тревоги Спилберга-Ханина</string>
 </resources>
