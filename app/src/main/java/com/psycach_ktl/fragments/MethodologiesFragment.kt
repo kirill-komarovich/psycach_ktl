@@ -11,18 +11,22 @@ import androidx.lifecycle.Observer
 import com.psycach_ktl.databinding.MethodologiesFragmentBinding
 import com.psycach_ktl.R
 import com.psycach_ktl.adapters.MethodologiesAdapter
+import com.psycach_ktl.entities.Methodology
 import com.psycach_ktl.viewmodels.MethodologiesViewModel
 
 class MethodologiesFragment : Fragment() {
     private lateinit var binding: MethodologiesFragmentBinding
     private lateinit var viewModel: MethodologiesViewModel
+    private lateinit var viewModelFactory: MethodologiesViewModel.Factory
     private var adapter = MethodologiesAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(this).get(MethodologiesViewModel::class.java)
+        viewModelFactory = MethodologiesViewModel.Factory(Methodology.supportedMethodologies)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(MethodologiesViewModel::class.java)
 
         binding = DataBindingUtil.inflate(
             inflater,
@@ -31,12 +35,11 @@ class MethodologiesFragment : Fragment() {
             false
         )
         binding.methodologiesList.adapter = adapter
-
         binding.lifecycleOwner = this
 
         viewModel.methodologies.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.data = it
+            it?.let { methodologies ->
+                adapter.data = methodologies
             }
         })
 
