@@ -9,5 +9,19 @@
         android:id="@+id/methodologies"
         android:name="com.psycach_ktl.fragments.MethodologiesFragment"
         android:label="methodologies_fragment"
-        tools:layout="@layout/methodologies_fragment" />
+        tools:layout="@layout/methodologies_fragment" >
+        <action
+            android:id="@+id/action_methodologies_to_methodologyInstructionsFragment"
+            app:destination="@id/methodologyInstructionsFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/methodologyInstructionsFragment"
+        android:name="com.psycach_ktl.fragments.MethodologyInstructionsFragment"
+        android:label="methodology_instructions_fragment"
+        tools:layout="@layout/methodology_instructions_fragment" >
+        <argument
+            android:name="methodologyType"
+            app:argType="string" />
+    </fragment>
 </navigation>

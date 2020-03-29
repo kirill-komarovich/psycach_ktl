@@ -1,36 +1,52 @@
 package com.psycach_ktl.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.psycach_ktl.R
+import androidx.recyclerview.widget.ListAdapter
+import com.psycach_ktl.databinding.MethodologyListItemBinding
 import com.psycach_ktl.entities.Methodology
-import com.psycach_ktl.services.I18n
 
-class MethodologiesAdapter : RecyclerView.Adapter<MethodologiesAdapter.ViewHolder>() {
-    var data = listOf<Methodology>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun getItemCount() = data.size
-
+class MethodologiesAdapter(private val clickListener: Listener) : ListAdapter<Methodology, MethodologiesAdapter.ViewHolder>(DiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
-        holder.methodologyTitle.text = I18n.translate(holder.itemView.context, item.type)
+        val item = getItem(position)
+        holder.bind(item!!, clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.methodology_list_item, parent, false)
-
-        return ViewHolder(view)
+        return ViewHolder.from(parent)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val methodologyTitle: TextView = itemView.findViewById(R.id.methodology_title)
+    class ViewHolder private constructor(val binding: MethodologyListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Methodology, clickListener: Listener) {
+            binding.methodology = item
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val inflater = LayoutInflater.from(parent.context)
+                val binding = MethodologyListItemBinding.inflate(inflater, parent, false)
+
+                return ViewHolder(binding)
+            }
+        }
+    }
+
+    class DiffCallback : DiffUtil.ItemCallback<Methodology>() {
+        override fun areItemsTheSame(oldItem: Methodology, newItem: Methodology): Boolean {
+            return oldItem.type == newItem.type
+        }
+
+        override fun areContentsTheSame(oldItem: Methodology, newItem: Methodology): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
+    class Listener(val clickListener: (methodologyType: String) -> Unit) {
+        fun onClick(methodology: Methodology) = clickListener(methodology.type)
     }
 }
