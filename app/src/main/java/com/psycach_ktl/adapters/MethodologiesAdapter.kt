@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
 import com.psycach_ktl.databinding.MethodologyListItemBinding
 import com.psycach_ktl.entities.Methodology
+import com.psycach_ktl.enums.MethodologyTypes
 
 class MethodologiesAdapter(private val clickListener: Listener) : ListAdapter<Methodology, MethodologiesAdapter.ViewHolder>(DiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -43,10 +44,9 @@ class MethodologiesAdapter(private val clickListener: Listener) : ListAdapter<Me
         override fun areContentsTheSame(oldItem: Methodology, newItem: Methodology): Boolean {
             return oldItem == newItem
         }
-
     }
 
-    class Listener(val clickListener: (methodologyType: String) -> Unit) {
+    class Listener(val clickListener: (methodologyType: MethodologyTypes) -> Unit) {
         fun onClick(methodology: Methodology) = clickListener(methodology.type)
     }
 }

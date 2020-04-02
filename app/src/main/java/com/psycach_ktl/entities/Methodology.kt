@@ -1,12 +1,11 @@
 package com.psycach_ktl.entities
 
-data class Methodology(val type: String) {
+import com.psycach_ktl.enums.MethodologyTypes
+
+data class Methodology(val type: MethodologyTypes) {
     companion object Factory {
-        var supportedMethodologies = listOf(
-            Methodology(type = "san"),
-            Methodology(type = "mental_states"),
-            Methodology(type = "jersild"),
-            Methodology(type = "alarm_scale")
-        )
+        var supportedMethodologies = MethodologyTypes.values().map { type ->
+            Methodology(type = type)
+        }
     }
 }

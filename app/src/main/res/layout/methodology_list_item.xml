@@ -36,7 +36,7 @@
             app:layout_constraintStart_toEndOf="@+id/label_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:translatedValue="@{methodology.type}"
+            app:translatedValue="@{methodology.type.toLowerCase()}"
             tools:text="Methodology Title" />
 
         <ImageView

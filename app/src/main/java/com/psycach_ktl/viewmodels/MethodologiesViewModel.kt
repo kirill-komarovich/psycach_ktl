@@ -1,16 +1,16 @@
 package com.psycach_ktl.viewmodels
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.psycach_ktl.entities.Methodology
 
 class MethodologiesViewModel(methodologies: List<Methodology>) : ViewModel() {
 
-    var methodologies = MutableLiveData<List<Methodology>>()
+    var _methodologies = MutableLiveData<List<Methodology>>()
+    val methodologies: LiveData<List<Methodology>>
+        get() = _methodologies
 
     init {
-        this.methodologies.value = methodologies
+        this._methodologies.value = methodologies
     }
 
     class Factory(private var methodologies: List<Methodology>) : ViewModelProvider.Factory {

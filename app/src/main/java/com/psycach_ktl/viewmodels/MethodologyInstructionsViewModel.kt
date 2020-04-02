@@ -1,20 +1,23 @@
 package com.psycach_ktl.viewmodels
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import com.psycach_ktl.enums.MethodologyTypes
 
-class MethodologyInstructionsViewModel(methodologyType: String) : ViewModel() {
+class MethodologyInstructionsViewModel(methodologyType: MethodologyTypes) : ViewModel() {
 
-    var methodologyType = MutableLiveData<String>()
-    val instructions: String
-        get() = "${methodologyType.value}_instructions"
+    private var _methodologyType = MutableLiveData<MethodologyTypes>()
+    val methodologyType: LiveData<MethodologyTypes>
+        get() = _methodologyType
 
-    init {
-        this.methodologyType.value = methodologyType
+    val instructions = Transformations.map(this.methodologyType) { type ->
+        "${type.toLowerCase()}_instructions"
     }
 
-    class Factory(private var methodologyType: String) : ViewModelProvider.Factory {
+    init {
+        _methodologyType.value = methodologyType
+    }
+
+    class Factory(private var methodologyType: MethodologyTypes) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MethodologyInstructionsViewModel::class.java)) {
                 return MethodologyInstructionsViewModel(methodologyType) as T
