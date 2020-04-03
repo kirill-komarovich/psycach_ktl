@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.psycach_ktl.R
 import com.psycach_ktl.databinding.MethodologyInstructionsFragmentBinding
 import com.psycach_ktl.viewmodels.MethodologyInstructionsViewModel
@@ -33,6 +34,11 @@ class MethodologyInstructionsFragment : Fragment() {
         )
         binding.instuctionsViewModel = viewModel
         binding.lifecycleOwner = this
+        binding.startButton.setOnClickListener {
+            this.findNavController().navigate(
+                MethodologyInstructionsFragmentDirections.actionMethodologyInstructionsFragmentToFormFragment(args.methodologyType)
+            )
+        }
 
         return binding.root
     }

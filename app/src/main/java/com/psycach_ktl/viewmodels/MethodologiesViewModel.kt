@@ -5,7 +5,7 @@ import com.psycach_ktl.entities.Methodology
 
 class MethodologiesViewModel(methodologies: List<Methodology>) : ViewModel() {
 
-    var _methodologies = MutableLiveData<List<Methodology>>()
+    private var _methodologies = MutableLiveData<List<Methodology>>()
     val methodologies: LiveData<List<Methodology>>
         get() = _methodologies
 

@@ -34,5 +34,71 @@
         \nНад вопросами долго не задумывайтесь, правильных и неправильных ответов здесь нет.
     </string>
 
+    <string-array name="san_input_min">
+        <item>Самочувствие\nплохое</item>,
+        <item>Чувствую себя\nсильным</item>
+        <item>Пассивный</item>
+        <item>Малоподвижный</item>
+        <item>Веселый</item>
+        <item>Хорошее настроение</item>
+        <item>Работоспособный</item>
+        <item>Полный сил</item>
+        <item>Медлительный</item>
+        <item>Бездеятельный</item>
+        <item>Счастливый</item>
+        <item>Жизнерадостный</item>
+        <item>Напряженный</item>
+        <item>Здоровый</item>
+        <item>Безучастный</item>
+        <item>Равнодушный</item>
+        <item>Восторженный</item>
+        <item>Радостный</item>
+        <item>Отдохнувший</item>
+        <item>Свежий</item>
+        <item>Сонливый</item>
+        <item>Желание отдохнуть</item>
+        <item>Спокойный</item>
+        <item>Оптимистичный</item>
+        <item>Выносливый</item>
+        <item>Бодрый</item>
+        <item>Соображать трудно</item>
+        <item>Рассеянный</item>
+        <item>Полный надежд</item>
+        <item>Довольный</item>
+    </string-array>
+
+    <string-array name="san_input_max">
+        <item>Самочувствие\nхорошее</item>
+        <item>Чувствую себя\nслабым</item>
+        <item>Активный</item>
+        <item>Подвижный</item>
+        <item>Грустный</item>
+        <item>Плохое настроение</item>
+        <item>Разбитый</item>
+        <item>Обессиленный</item>
+        <item>Быстрый</item>
+        <item>Деятельный</item>
+        <item>Несчастный</item>
+        <item>Мрачный</item>
+        <item>Расслабленный</item>
+        <item>Больной</item>
+        <item>Увлеченный</item>
+        <item>Взволнованный</item>
+        <item>Унылый</item>
+        <item>Печальный</item>
+        <item>Усталый</item>
+        <item>Изнуренный</item>
+        <item>Возбужденный</item>
+        <item>Желание работать</item>
+        <item>Озабоченный</item>
+        <item>Пессимистичный</item>
+        <item>Утомляемый</item>
+        <item>Вялый</item>
+        <item>Соображать легко</item>
+        <item>Внимательный</item>
+        <item>Разочарованный</item>
+        <item>Недовольный</item>
+    </string-array>
+
     <string name="btn_start">Начать</string>
 </resources>

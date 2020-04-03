@@ -16,10 +16,21 @@
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
-        android:id="@+id/methodologyInstructionsFragment"
+        android:id="@+id/methodologyInstructions"
         android:name="com.psycach_ktl.fragments.MethodologyInstructionsFragment"
         android:label="methodology_instructions_fragment"
         tools:layout="@layout/methodology_instructions_fragment" >
+        <argument
+            android:name="methodologyType"
+            app:argType="com.psycach_ktl.enums.MethodologyTypes" />
+        <action
+            android:id="@+id/action_methodologyInstructionsFragment_to_formFragment"
+            app:destination="@id/form" />
+    </fragment>
+    <fragment
+        android:id="@+id/form"
+        android:name="com.psycach_ktl.fragments.FormFragment"
+        android:label="form_fragment">
         <argument
             android:name="methodologyType"
             app:argType="com.psycach_ktl.enums.MethodologyTypes" />
