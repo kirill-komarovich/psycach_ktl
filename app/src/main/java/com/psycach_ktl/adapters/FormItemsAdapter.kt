@@ -13,13 +13,13 @@ import com.psycach_ktl.entities.FormItem.*
 import com.psycach_ktl.enums.FormItemTypes
 import java.lang.ClassCastException
 
-class FormItemsAdapter: ListAdapter<FormItem, RecyclerView.ViewHolder>(DiffCallback()) {
+class FormItemsAdapter(private val submitListener: SubmitListener): ListAdapter<FormItem, RecyclerView.ViewHolder>(DiffCallback()) {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         when(holder) {
-            is SliderViewHolder -> {
-                holder.bind(item!! as SliderItem)
-            }
+            is SliderViewHolder -> holder.bind(item!! as SliderItem)
+            is SubmitButtonViewHolder -> holder.bind(submitListener)
+            else -> throw ClassCastException("Unknown ViewHolder $holder")
         }
     }
 
@@ -64,6 +64,10 @@ class FormItemsAdapter: ListAdapter<FormItem, RecyclerView.ViewHolder>(DiffCallb
     }
 
     class SubmitButtonViewHolder private constructor(val binding: SubmitButtonFormItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(submitListener: SubmitListener) {
+            binding.clickListener = submitListener
+            binding.executePendingBindings()
+        }
         companion object {
             fun from(parent: ViewGroup): SubmitButtonViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
@@ -82,5 +86,9 @@ class FormItemsAdapter: ListAdapter<FormItem, RecyclerView.ViewHolder>(DiffCallb
         override fun areContentsTheSame(oldItem: FormItem, newItem: FormItem): Boolean {
             return oldItem == newItem
         }
+    }
+
+    class SubmitListener(val clickListener: () -> Unit) {
+        fun onClick() = clickListener()
     }
 }
