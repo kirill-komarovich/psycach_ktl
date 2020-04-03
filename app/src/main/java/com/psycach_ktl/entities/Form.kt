@@ -9,7 +9,7 @@ data class Form(val items: List<FormItem>, val methodologyType: MethodologyTypes
             val formType = FormTypes.forMethodology(methodologyType)
             val formItems = FormItem.build(formType, methodologyType.getQuestionsCount(), methodologyType.toLowerCase())
 
-            return Form(formItems, methodologyType);
+            return Form(formItems, methodologyType)
         }
     }
 }

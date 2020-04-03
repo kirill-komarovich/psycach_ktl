@@ -11,7 +11,6 @@ enum class FormTypes {
                 MethodologyTypes.JERSILD,
                     MethodologyTypes.ALARM_SCALE,
                     MethodologyTypes.MENTAL_STATES -> RADIO_BUTTON
-                else -> throw IllegalAccessException("Unknown Methodology type $type")
             }
         }
     }

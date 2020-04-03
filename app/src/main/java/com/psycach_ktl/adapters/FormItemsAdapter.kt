@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.slider.Slider
 import com.psycach_ktl.databinding.SliderFormItemBinding
+import com.psycach_ktl.databinding.SubmitButtonFormItemBinding
 import com.psycach_ktl.entities.FormItem
-import com.psycach_ktl.entities.FormItem.SliderItem
+import com.psycach_ktl.entities.FormItem.*
 import com.psycach_ktl.enums.FormItemTypes
 import java.lang.ClassCastException
 
@@ -25,6 +26,7 @@ class FormItemsAdapter: ListAdapter<FormItem, RecyclerView.ViewHolder>(DiffCallb
     override fun getItemViewType(position: Int): Int {
         return when(val item = getItem(position)) {
             is SliderItem -> FormItemTypes.SLIDER.ordinal
+            is SubmitButtonItem -> FormItemTypes.SUBMIT_BUTTON.ordinal
             else -> throw ClassCastException("Unknown FormItem $item")
         }
     }
@@ -32,6 +34,7 @@ class FormItemsAdapter: ListAdapter<FormItem, RecyclerView.ViewHolder>(DiffCallb
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
             FormItemTypes.SLIDER.ordinal -> SliderViewHolder.from(parent)
+            FormItemTypes.SUBMIT_BUTTON.ordinal -> SubmitButtonViewHolder.from(parent)
             else -> throw ClassCastException("Unknown ViewType $viewType")
         }
     }
@@ -60,6 +63,17 @@ class FormItemsAdapter: ListAdapter<FormItem, RecyclerView.ViewHolder>(DiffCallb
         }
     }
 
+    class SubmitButtonViewHolder private constructor(val binding: SubmitButtonFormItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        companion object {
+            fun from(parent: ViewGroup): SubmitButtonViewHolder {
+                val inflater = LayoutInflater.from(parent.context)
+                val binding = SubmitButtonFormItemBinding.inflate(inflater, parent, false)
+
+                return SubmitButtonViewHolder(binding)
+            }
+        }
+    }
+
     class DiffCallback : DiffUtil.ItemCallback<FormItem>() {
         override fun areItemsTheSame(oldItem: FormItem, newItem: FormItem): Boolean {
             return oldItem.id == newItem.id
@@ -70,4 +84,3 @@ class FormItemsAdapter: ListAdapter<FormItem, RecyclerView.ViewHolder>(DiffCallb
         }
     }
 }
-

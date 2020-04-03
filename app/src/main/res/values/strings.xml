@@ -101,4 +101,5 @@
     </string-array>
 
     <string name="btn_start">Начать</string>
+    <string name="btn_submit">Получить результаты</string>
 </resources>

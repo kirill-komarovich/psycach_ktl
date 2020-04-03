@@ -9,12 +9,15 @@ sealed class FormItem(open val id: Int) {
 
     companion object {
         fun build(formType: FormTypes, size: Int, labelKeyPrefix: String = ""): List<FormItem> {
-            return when(formType) {
-                FormTypes.SLIDER -> List(size) {
+            val items: MutableList<FormItem> = when(formType) {
+                FormTypes.SLIDER -> MutableList(size) {
                     SliderItem(id = it, labelKeyPrefix = labelKeyPrefix, min = -3, max = 3, step = 1, value = 0)
                 }
                 else -> throw IllegalAccessException("Unknown Form type $formType")
             }
+
+            items.add(SubmitButtonItem())
+            return items.toList()
         }
     }
 
@@ -32,5 +35,6 @@ sealed class FormItem(open val id: Int) {
         val maxLabelArrayKey: String
             get() = super.getLabelKey(labelKeyPrefix, "max")
     }
-}
 
+    data class SubmitButtonItem(override val id: Int = -1) : FormItem(id)
+}
