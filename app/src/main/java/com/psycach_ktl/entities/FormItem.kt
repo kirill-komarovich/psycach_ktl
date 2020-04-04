@@ -1,24 +1,8 @@
 package com.psycach_ktl.entities
 
-import com.psycach_ktl.enums.FormTypes
-
 sealed class FormItem(open val id: Int) {
     fun getLabelKey(prefix: String, label: String = ""): String {
         return listOf(prefix, "input", label).joinToString("_")
-    }
-
-    companion object {
-        fun build(formType: FormTypes, size: Int, labelKeyPrefix: String = ""): List<FormItem> {
-            val items: MutableList<FormItem> = when(formType) {
-                FormTypes.SLIDER -> MutableList(size) {
-                    SliderItem(id = it, labelKeyPrefix = labelKeyPrefix, min = -3, max = 3, step = 1, value = 0)
-                }
-                else -> throw IllegalAccessException("Unknown Form type $formType")
-            }
-
-            items.add(SubmitButtonItem())
-            return items.toList()
-        }
     }
 
     data class SliderItem(

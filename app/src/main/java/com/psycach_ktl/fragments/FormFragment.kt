@@ -21,7 +21,7 @@ class FormFragment : Fragment() {
     private lateinit var viewModel: FormViewModel
     private lateinit var viewModelFactory: FormViewModel.Factory
     private var adapter = FormItemsAdapter(FormItemsAdapter.SubmitListener {
-        Toast.makeText(context, viewModel.form.value.toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, viewModel.form.value?.items?.joinToString(", "), Toast.LENGTH_SHORT).show()
     })
 
     override fun onCreateView(
