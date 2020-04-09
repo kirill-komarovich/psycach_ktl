@@ -23,13 +23,17 @@ class MethodologiesFragment : Fragment() {
       this.findNavController().navigate(MethodologiesFragmentDirections.actionMethodologiesToMethodologyInstructionsFragment(methodologyType))
     })
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModelFactory = MethodologiesViewModel.Factory(Methodology.supportedMethodologies)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MethodologiesViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModelFactory = MethodologiesViewModel.Factory(Methodology.supportedMethodologies)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MethodologiesViewModel::class.java)
-
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.methodologies_fragment,
