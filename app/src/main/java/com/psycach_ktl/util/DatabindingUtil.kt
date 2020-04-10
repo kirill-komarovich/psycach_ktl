@@ -1,10 +1,10 @@
 package com.psycach_ktl.util
 
 import android.content.res.Resources
-import android.util.Log
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.psycach_ktl.entities.FormItem.SliderItem
+import java.util.*
 
 @BindingAdapter("translatedValue")
 fun TextView.setTranslatedValue(item: String?) {
@@ -32,4 +32,13 @@ fun TextView.setMaxLabelValue(item: SliderItem?) {
 
         text = maxLabelStringArray[it.id]
     }
+}
+
+@ExperimentalStdlibApi
+@BindingAdapter(value = ["resultLevel", "resultValue"], requireAll = true)
+fun TextView.setResultLabel(level: String, value: Float) {
+    val res: Resources = context.resources
+    val levelLabel = res.getString(res.getIdentifier(level, "string",  context.packageName))
+
+    text = String.format(text.toString(), levelLabel.capitalize(Locale.ROOT), value )
 }

@@ -100,6 +100,22 @@
         <item>Недовольный</item>
     </string-array>
 
+    <string name="san_details">
+        При анализе функционального состояния важны не только значения отдельных его показателей, но и их соотношение.
+        \nУ отдохнувшего человека оценки активности, настроения и самочувствия обычно примерно равны.
+        \nПо мере нарастания усталости соотношение между ними изменяется за счет относительного снижения самочувствия и активности по сравнению с настроением.
+    </string>
+    <string name="san_health_result">%1$s самочувствие (%2$.1f)</string>
+    <string name="san_activity_result">%1$s активность (%2$.1f)</string>
+    <string name="san_mood_result">%1$s настроение (%2$.1f)</string>
+
+    <string name="low_level_neuter">Низкое</string>
+    <string name="low_level_feminine">Низкая</string>
+    <string name="average_level_neuter">Среднее</string>
+    <string name="average_level_feminine">Средняя</string>
+    <string name="good_level_neuter">Высокое</string>
+    <string name="good_level_feminine">Высокая</string>
+
     <string name="btn_start">Начать</string>
     <string name="btn_submit">Получить результаты</string>
 </resources>

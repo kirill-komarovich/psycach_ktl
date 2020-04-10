@@ -20,11 +20,12 @@ data class SanResult(override val items: List<FormResultItem>) : FormResult(Meth
 
     private fun calculateGroup(groupIds: List<Int>): Float {
         val groupItems = items.filter { groupIds.contains(it.id) }
-        val values = groupItems.map { formResultItem -> formResultItem.value + 4 }
+        val values = groupItems.map { formResultItem -> formResultItem.value + ANSWER_OFFSET }
         return values.sum().toFloat() / groupIds.size
     }
 
     companion object {
+        const val ANSWER_OFFSET = 4
         private val HEALTH_IDS = listOf(0, 1, 6, 7, 12, 13, 18, 19, 24, 25)
         private val ACTIVITY_IDS = listOf(2, 3, 8, 9, 14, 15, 20, 22, 26, 27)
         private val MOOD_IDS = listOf(4, 5, 10, 11, 16, 17, 22, 23, 28, 29)
