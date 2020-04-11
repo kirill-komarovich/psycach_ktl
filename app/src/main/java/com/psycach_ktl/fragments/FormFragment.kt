@@ -1,5 +1,6 @@
 package com.psycach_ktl.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,19 +10,25 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-
+import com.google.android.material.snackbar.Snackbar
 import com.psycach_ktl.R
 import com.psycach_ktl.adapters.FormItemsAdapter
 import com.psycach_ktl.databinding.FormFragmentBinding
 import com.psycach_ktl.viewmodels.FormViewModel
 
 class FormFragment : Fragment() {
+    private lateinit var errorSnackbar: Snackbar
     private lateinit var binding: FormFragmentBinding
     private lateinit var viewModel: FormViewModel
     private lateinit var viewModelFactory: FormViewModel.Factory
     private var adapter = FormItemsAdapter(FormItemsAdapter.SubmitListener {
         val form = viewModel.form.value!!
-        this.findNavController().navigate(FormFragmentDirections.actionFormToResult(form.toParcel()))
+        if (form.isValid()) {
+            this.findNavController()
+                .navigate(FormFragmentDirections.actionFormToResult(form.toParcel()))
+        } else {
+            errorSnackbar.show()
+        }
     })
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +58,13 @@ class FormFragment : Fragment() {
                 adapter.submitList(formItems)
             }
         })
+        makeErrorSnackbar(container!!)
 
         return binding.root
+    }
+
+    private fun makeErrorSnackbar(root: ViewGroup) {
+        errorSnackbar = Snackbar.make(root, R.string.error_presence_all, Snackbar.LENGTH_LONG)
+        errorSnackbar.view.setBackgroundColor(Color.RED)
     }
 }

@@ -35,9 +35,8 @@ sealed class FormItem {
 
     data class RadioButtonGroupItem(
         override val id: Int,
-        val answersCount: Int,
         val labelKeyPrefix: String = "",
-        override var value: Int? = null
+        override var value: Int = -1
     ) : FormItem() {
         val questionLabelKey: String
             get() = super.getLabelKey(labelKeyPrefix, "questions")
@@ -46,7 +45,7 @@ sealed class FormItem {
             get() = super.getLabelKey(labelKeyPrefix, "answers")
 
         override fun toParcel(): FormItemParcel? {
-            return value?.let { FormItemParcel(id, it) }
+            return FormItemParcel(id, value)
         }
     }
 

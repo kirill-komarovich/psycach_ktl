@@ -3,6 +3,7 @@ package com.psycach_ktl.util
 import android.content.res.Resources
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.psycach_ktl.entities.FormItem.RadioButtonGroupItem
 import com.psycach_ktl.entities.FormItem.SliderItem
 import java.util.*
 
@@ -31,6 +32,16 @@ fun TextView.setMaxLabelValue(item: SliderItem?) {
         val maxLabelStringArray = res.getStringArray(res.getIdentifier(it.maxLabelArrayKey, "array",  context.packageName))
 
         text = maxLabelStringArray[it.id]
+    }
+}
+
+@BindingAdapter("questionLabel")
+fun TextView.setQuestionLabel(item: RadioButtonGroupItem?) {
+    item?.let {
+        val res: Resources = context.resources
+        val questionsStringArray = res.getStringArray(res.getIdentifier(it.questionLabelKey, "array",  context.packageName))
+
+        text = questionsStringArray[it.id]
     }
 }
 
