@@ -21,6 +21,7 @@ open class Form(
                 MethodologyTypes.SAN -> SanForm()
                 MethodologyTypes.MENTAL_STATES -> MentalStatesForm()
                 MethodologyTypes.JERSILD -> JersildForm()
+                MethodologyTypes.ALARM_SCALE -> AlarmScaleForm()
                 else -> throw IllegalArgumentException("Unknown Form for $methodologyType methodology")
             }
         }
