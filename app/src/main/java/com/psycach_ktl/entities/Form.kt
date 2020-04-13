@@ -1,7 +1,6 @@
 package com.psycach_ktl.entities
 
-import com.psycach_ktl.entities.forms.MentalStatesForm
-import com.psycach_ktl.entities.forms.SanForm
+import com.psycach_ktl.entities.forms.*
 import com.psycach_ktl.enums.MethodologyTypes
 import com.psycach_ktl.parcels.FormParcel
 
@@ -21,6 +20,7 @@ open class Form(
             return when(methodologyType) {
                 MethodologyTypes.SAN -> SanForm()
                 MethodologyTypes.MENTAL_STATES -> MentalStatesForm()
+                MethodologyTypes.JERSILD -> JersildForm()
                 else -> throw IllegalArgumentException("Unknown Form for $methodologyType methodology")
             }
         }
