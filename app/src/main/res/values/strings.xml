@@ -105,9 +105,15 @@
         \nУ отдохнувшего человека оценки активности, настроения и самочувствия обычно примерно равны.
         \nПо мере нарастания усталости соотношение между ними изменяется за счет относительного снижения самочувствия и активности по сравнению с настроением.
     </string>
-    <string name="san_health_result">%1$s самочувствие (%2$.1f)</string>
-    <string name="san_activity_result">%1$s активность (%2$.1f)</string>
-    <string name="san_mood_result">%1$s настроение (%2$.1f)</string>
+    <string name="san_low_health">Низкое самочувствие (%1$.1f)</string>
+    <string name="san_average_health">Среднее самочувствие (%1$.1f)</string>
+    <string name="san_good_health">Высокое самочувствие (%1$.1f)</string>
+    <string name="san_low_activity">Низкая активность (%1$.1f)</string>
+    <string name="san_average_activity">Средняя активность (%1$.1f)</string>
+    <string name="san_good_activity">Высокая активность (%1$.1f)</string>
+    <string name="san_low_mood">Низкое настроение (%1$.1f)</string>
+    <string name="san_average_mood">Среднее настроение (%1$.1f)</string>
+    <string name="san_good_mood">Высокое настроение (%1$.1f)</string>
 
     <string-array name="mental_states_input_questions">
         <item>Не чувствую в себе уверенности"</item>
@@ -158,6 +164,56 @@
         <item>Подходит</item>
     </string-array>
 
+    <string name="mental_states_result_details">
+            Степень выраженности:
+            \nСлабо (0 - 2)
+            \nУмеренно (3 - 4)
+            \nСильно (5 - 6)
+            \nОчень высоко (7 - 8)
+    </string>
+
+    <string name="mental_states_anxiety_result">тревожность</string>
+    <string name="mental_states_frustration_result">фрустрация</string>
+    <string name="mental_states_aggressiveness_result">агрессивность</string>
+    <string name="mental_states_rigidity_result">ригидность</string>
+
+    <string name="mental_states_high_anxiety">Вы очень тревожны (%1$.1f)</string>
+    <string name="mental_states_average_anxiety">Тревожность средняя, допустимого уровня (%1$.1f)</string>
+    <string name="mental_states_low_anxiety">Вы не тревожны (%1$.1f)</string>
+    <string name="mental_states_high_frustration">У вас низкая самооценка, вы избегаете трудностей, боитесь неудач, фрустрированы (%1$.1f)</string>
+    <string name="mental_states_average_frustration">У вас средний уровень фрустрации (%1$.1f)</string>
+    <string name="mental_states_low_frustration">У вас высокая самооценка, вы устойчивы к неудачам, не боитесь трудностей (%1$.1f)</string>
+    <string name="mental_states_high_aggressiveness">Вы агрессивны, не выдержаны, у вас имеются трудности в общении и работе с людьми (%1$.1f)</string>
+    <string name="mental_states_average_aggressiveness">У вас средний уровень агрессивности (%1$.1f)</string>
+    <string name="mental_states_low_aggressiveness">Вы спокойны, выдержаны (%1$.1f)</string>
+    <string name="mental_states_high_rigidity">У вас сильно выражена ригидность (%1$.1f)</string>
+    <string name="mental_states_average_rigidity">У вас средний уровень ригидности (%1$.1f)</string>
+    <string name="mental_states_low_rigidity">Ригидности нет, у вас легкая переключаемость (%1$.1f)</string>
+
+
+    <string name="mental_states_anxiety_details">
+        Тревожность - индивидуальная психическая особенность, проявляющаяся в склонности человека к
+        частым и интенсивным переживаниям состояния тревоги, а также в низком пороге его возникновения.
+        Здесь тревога выступает как переживание эмоционального дискомфорта, связанное с ожиданием
+        неблагополучия, с предчувствием грозящей или кажущейся таковой опасности
+    </string>
+    <string name="mental_states_frustration_details">
+        Фрустрация – психическое состояние, вызванное неуспехом в удовлетворении потребности, желания.
+        Проявляется в отрицательных переживаниях: разочаровании, раздражении, тревоге, отчаянии и т. п.
+    </string>
+    <string name="mental_states_aggressiveness_details">
+        Агрессивность – не вызванная объективными обстоятельствами неспровоцированная враждебность
+        человека по отношению к людям и окружающему миру. Проявляется в тенденции нападать, причинять
+        неприятности, наносить вред людям, животным, окружающему миру. Иногда проявляется в форме
+        демонстрации превосходства в силе по отношению к другому человеку или иному социальному объекту
+    </string>
+    <string name="mental_states_rigidity_details">
+        Ригидность – затрудненность (вплоть до полной неспособности) в изменении намеченной субъектом
+        программы деятельности в условиях, объективно требующих ее перестройки. Сильно выраженная
+        ригидность проявляется в неизменяемости поведения, убеждений, взглядов, даже если они не
+        соответствуют реальной действительности. Противоположное по значению свойство личности – пластичность
+    </string>
+
     <string name="low_level_neuter">Низкое</string>
     <string name="low_level_feminine">Низкая</string>
     <string name="average_level_neuter">Среднее</string>
@@ -167,5 +223,5 @@
 
     <string name="btn_start">Начать</string>
     <string name="btn_submit">Получить результаты</string>
-    <string name="error_presence_all">Перед получение результатов Вы должны ответить на все вопросы</string>
+    <string name="error_presence_all">Перед получением результатов Вы должны ответить на все вопросы</string>
 </resources>

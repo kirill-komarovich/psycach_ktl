@@ -12,23 +12,18 @@ class SanResultViewModel(formResult: SanResult) : ResultViewModel() {
         get() = _formResult
 
     val healthLevel: ResultLevels
-        get() {
-            val result = formResult.value!!
-            return result.groupLevel(result.health)
-        }
+        get() = result.groupLevel(result.health)
+
     val activityLevel: ResultLevels
-        get() {
-            val result = formResult.value!!
-            return result.groupLevel(result.activity)
-        }
+        get() = result.groupLevel(result.activity)
+
     val moodLevel: ResultLevels
-        get() {
-            val result = formResult.value!!
-            return result.groupLevel(result.mood)
-        }
+        get() = result.groupLevel(result.mood)
+
+    private val result: SanResult
+        get() = _formResult.value!!
 
     init {
         _formResult.value = formResult
     }
-
 }

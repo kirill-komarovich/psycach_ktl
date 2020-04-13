@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.psycach_ktl.R
 import com.psycach_ktl.enums.MethodologyTypes
+import com.psycach_ktl.fragments.result.MentalStatesResultFragment
 import com.psycach_ktl.fragments.result.SanResultFragment
 
 
@@ -43,6 +44,7 @@ class ResultFragment : Fragment() {
     private fun fragmentFrom(methodologyType: MethodologyTypes): Fragment {
         return when(methodologyType) {
             MethodologyTypes.SAN -> SanResultFragment()
+            MethodologyTypes.MENTAL_STATES -> MentalStatesResultFragment()
             else -> throw IllegalArgumentException("Unknown ResultFragment for $methodologyType")
         }
     }

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.psycach_ktl.viewmodels.result.MentalStatesResultViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".fragments.result.MentalStatesResultFragment">
+
+            <TextView
+                android:id="@+id/mental_states_result_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/mental_states_result_details"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/mental_states_anxiety_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mental_states_result_details"
+                app:resultKey='@{"anxiety"}'
+                app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
+                app:resultLevel="@{viewModel.anxietyLevel.toLowerCase()}"
+                app:resultValue="@{viewModel.formResult.anxiety}"
+                tools:text="@string/mental_states_average_anxiety" />
+
+            <TextView
+                android:id="@+id/mental_states_anxiety_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:text="@string/mental_states_anxiety_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mental_states_anxiety_result" />
+
+            <TextView
+                android:id="@+id/mental_states_frustration_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:resultLevel="@{viewModel.frustrationLevel.toLowerCase()}"
+                app:resultValue="@{viewModel.formResult.frustration}"
+                app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
+                app:resultKey='@{"frustration"}'
+                tools:text="@string/mental_states_average_frustration"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mental_states_anxiety_details" />
+
+            <TextView
+                android:id="@+id/mental_states_frustration_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:text="@string/mental_states_frustration_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mental_states_frustration_result" />
+
+            <TextView
+                android:id="@+id/mental_states_aggressiveness_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:resultLevel="@{viewModel.aggressivenessLevel.toLowerCase()}"
+                app:resultValue="@{viewModel.formResult.aggressiveness}"
+                app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
+                app:resultKey='@{"aggressiveness"}'
+                tools:text="@string/mental_states_average_aggressiveness"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mental_states_frustration_details" />
+
+            <TextView
+                android:id="@+id/mental_states_aggressiveness_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:text="@string/mental_states_aggressiveness_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mental_states_aggressiveness_result" />
+
+            <TextView
+                android:id="@+id/mental_states_rigidity_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:resultLevel="@{viewModel.rigidityLevel.toLowerCase()}"
+                app:resultValue="@{viewModel.formResult.rigidity}"
+                app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
+                app:resultKey='@{"rigidity"}'
+                tools:text="@string/mental_states_average_rigidity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mental_states_aggressiveness_details" />
+
+            <TextView
+                android:id="@+id/mental_states_rigidity_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/mental_states_rigidity_details"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mental_states_rigidity_result" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
