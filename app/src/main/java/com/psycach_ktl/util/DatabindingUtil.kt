@@ -3,8 +3,7 @@ package com.psycach_ktl.util
 import android.content.res.Resources
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.psycach_ktl.entities.FormItem.RadioButtonGroupItem
-import com.psycach_ktl.entities.FormItem.SliderItem
+import com.psycach_ktl.entities.FormItem.*
 
 @BindingAdapter("translatedValue")
 fun TextView.setTranslatedValue(item: String?) {
@@ -48,6 +47,15 @@ fun TextView.setQuestionLabel(item: RadioButtonGroupItem?) {
 fun setResultLabel(view: TextView, level: String, value: Float, key: String, prefix: String) {
     val res: Resources = view.context.resources
     val labelName = res.getIdentifier("${prefix}_${level}_${key}", "string",  view.context.packageName)
+    val label = res.getString(labelName)
+
+    view.text = String.format(label, value)
+}
+
+@BindingAdapter(value = ["resultValue", "resultKey", "resultKeyPrefix"], requireAll = true)
+fun setResultLabel(view: TextView, value: Float, key: String, prefix: String) {
+    val res: Resources = view.context.resources
+    val labelName = res.getIdentifier("${prefix}_${key}", "string",  view.context.packageName)
     val label = res.getString(labelName)
 
     view.text = String.format(label, value)

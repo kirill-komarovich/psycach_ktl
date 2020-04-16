@@ -208,14 +208,6 @@
         <item>Подходит</item>
     </string-array>
 
-    <string name="mental_states_result_details">
-            Степень выраженности:
-            \nСлабо (0 - 2)
-            \nУмеренно (3 - 4)
-            \nСильно (5 - 6)
-            \nОчень высоко (7 - 8)
-    </string>
-
     <string name="mental_states_anxiety_result">тревожность</string>
     <string name="mental_states_frustration_result">фрустрация</string>
     <string name="mental_states_aggressiveness_result">агрессивность</string>
@@ -304,6 +296,23 @@
         <item>Я думаю именно так. Я хотел(а) бы лично разобраться</item>
     </string-array>
 
+    <string name="jersild_result_details">
+        Степень выраженности:
+        \nСлабо (0 - 2)
+        \nУмеренно (3 - 4)
+        \nСильно (5 - 6)
+        \nОчень высоко (7 - 8)
+    </string>
+
+    <string name="jersild_loneliness">Одиночество (%1$.1f)</string>
+    <string name="jersild_meaninglessness">Ощущение бессмысленности существования (%1$.1f)</string>
+    <string name="jersild_freedom">Свобода выбора (отношение к авторитету) (%1$.1f)</string>
+    <string name="jersild_sexual_conflict">Половой конфликт (%1$.1f)</string>
+    <string name="jersild_hostile_conflict">Враждебный конфликт (%1$.1f)</string>
+    <string name="jersild_discrepancy">Расхождение между реальным и идеальным «Я» (%1$.1f)</string>
+    <string name="jersild_strength_of_will">Свобода воли (%1$.1f)</string>
+    <string name="jersild_hopelessness">Безнадежность (%1$.1f)</string>
+    <string name="jersild_homelessness">Чувство неприкаянности, бездомность (%1$.1f)</string>
 
     <string-array name="alarm_scale_input_questions">
         <item>Я спокоен</item>

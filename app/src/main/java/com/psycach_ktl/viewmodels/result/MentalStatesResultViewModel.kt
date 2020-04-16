@@ -12,24 +12,16 @@ class MentalStatesResultViewModel(formResult: MentalStatesResult) : ResultViewMo
         get() = _formResult
 
     val anxietyLevel: ResultLevels
-        get() {
-            return result.groupLevel(result.anxiety)
-        }
+        get() = result.groupLevel(result.anxiety)
 
     val frustrationLevel: ResultLevels
-        get() {
-            return result.groupLevel(result.frustration)
-        }
+        get() = result.groupLevel(result.frustration)
 
     val aggressivenessLevel: ResultLevels
-        get() {
-            return result.groupLevel(result.aggressiveness)
-        }
+        get() = result.groupLevel(result.aggressiveness)
 
     val rigidityLevel: ResultLevels
-        get() {
-            return result.groupLevel(result.rigidity)
-        }
+        get() = result.groupLevel(result.rigidity)
 
     private val result: MentalStatesResult
         get() = _formResult.value!!

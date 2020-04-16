@@ -19,19 +19,6 @@
             tools:context=".fragments.result.MentalStatesResultFragment">
 
             <TextView
-                android:id="@+id/mental_states_result_details"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/mental_states_result_details"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/mental_states_anxiety_result"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -41,7 +28,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mental_states_result_details"
+                app:layout_constraintTop_toTopOf="parent"
                 app:resultKey='@{"anxiety"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
                 app:resultLevel="@{viewModel.anxietyLevel.toLowerCase()}"

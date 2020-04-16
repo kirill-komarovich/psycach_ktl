@@ -3,10 +3,8 @@ package com.psycach_ktl.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.psycach_ktl.entities.FormResult
-import com.psycach_ktl.entities.results.MentalStatesResult
-import com.psycach_ktl.entities.results.SanResult
-import com.psycach_ktl.viewmodels.result.MentalStatesResultViewModel
-import com.psycach_ktl.viewmodels.result.SanResultViewModel
+import com.psycach_ktl.entities.results.*
+import com.psycach_ktl.viewmodels.result.*
 
 open class ResultViewModel : ViewModel() {
     class Factory(private val formResult: FormResult) : ViewModelProvider.Factory {
@@ -15,6 +13,7 @@ open class ResultViewModel : ViewModel() {
                 return when (modelClass) {
                     SanResultViewModel::class.java -> SanResultViewModel(formResult as SanResult)
                     MentalStatesResultViewModel::class.java -> MentalStatesResultViewModel(formResult as MentalStatesResult)
+                    JersildResultViewModel::class.java -> JersildResultViewModel(formResult as JersildResult)
                     else -> ResultViewModel()
                 } as T
             }
