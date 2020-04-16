@@ -20,7 +20,7 @@ class MethodologiesFragment : Fragment() {
     private lateinit var viewModel: MethodologiesViewModel
     private lateinit var viewModelFactory: MethodologiesViewModel.Factory
     private var adapter = MethodologiesAdapter(MethodologiesAdapter.Listener { methodologyType ->
-      this.findNavController().navigate(MethodologiesFragmentDirections.actionMethodologiesToMethodologyInstructionsFragment(methodologyType))
+        this.findNavController().navigate(MethodologiesFragmentDirections.actionMethodologiesToInstructions(methodologyType))
     })
 
     override fun onCreate(savedInstanceState: Bundle?) {

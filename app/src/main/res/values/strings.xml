@@ -355,6 +355,9 @@
         <item>Почти всегда</item>
     </string-array>
 
+    <string name="instructions_fragment_label">Иструкция</string>
+    <string name="form_fragment_label">Прохождение методики</string>
+    <string name="result_fragment_label">Результаты</string>
     <string name="btn_start">Начать</string>
     <string name="btn_submit">Получить результаты</string>
     <string name="error_presence_all">Перед получением результатов Вы должны ответить на все вопросы</string>
