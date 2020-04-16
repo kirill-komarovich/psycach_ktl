@@ -13,6 +13,10 @@ class MethodologyInstructionsViewModel(methodologyType: MethodologyTypes) : View
         "${type.toLowerCase()}_instructions"
     }
 
+    val about = Transformations.map(this.methodologyType) { type ->
+        "${type.toLowerCase()}_about"
+    }
+
     init {
         _methodologyType.value = methodologyType
     }

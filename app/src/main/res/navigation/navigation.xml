@@ -11,18 +11,20 @@
         android:label="methodologies_fragment"
         tools:layout="@layout/methodologies_fragment" >
         <action
-            android:id="@+id/action_methodologies_to_methodologyInstructionsFragment"
-            app:destination="@id/instructions"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_methodologies_to_instructions"
+            app:destination="@id/instructions" />
     </fragment>
     <fragment
         android:id="@+id/instructions"
         android:name="com.psycach_ktl.fragments.MethodologyInstructionsFragment"
-        android:label="methodology_instructions_fragment"
+        android:label="{title}"
         tools:layout="@layout/methodology_instructions_fragment" >
         <argument
             android:name="methodologyType"
             app:argType="com.psycach_ktl.enums.MethodologyTypes" />
+        <argument
+            android:name="title"
+            app:argType="string" />
         <action
             android:id="@+id/action_methodologyInstructionsFragment_to_formFragment"
             app:destination="@id/form" />
@@ -47,5 +49,14 @@
         <argument
             android:name="formParcel"
             app:argType="com.psycach_ktl.parcels.FormParcel" />
+    </fragment>
+    <fragment
+        android:id="@+id/about_methodology_fragment"
+        android:name="com.psycach_ktl.fragments.AboutMethodologyFragment"
+        android:label="@string/about_methodology"
+        tools:layout="@layout/about_methodology_fragment" >
+        <argument
+            android:name="methodologyType"
+            app:argType="com.psycach_ktl.enums.MethodologyTypes" />
     </fragment>
 </navigation>

@@ -1,12 +1,11 @@
 package com.psycach_ktl.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.psycach_ktl.R
 import com.psycach_ktl.databinding.MethodologyInstructionsFragmentBinding
@@ -43,7 +42,26 @@ class MethodologyInstructionsFragment : Fragment() {
                 MethodologyInstructionsFragmentDirections.actionMethodologyInstructionsFragmentToFormFragment(viewModel.methodologyType.value!!)
             )
         }
-
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.form_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.about_methodology_fragment -> {
+                val aboutBundle = Bundle()
+
+                aboutBundle.putSerializable("methodologyType", viewModel.methodologyType.value!!)
+
+                view!!.findNavController().navigate(R.id.about_methodology_fragment, aboutBundle)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
