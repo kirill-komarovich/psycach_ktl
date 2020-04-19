@@ -16,9 +16,9 @@ data class JersildResult(override val items: List<FormResultItem>) : FormResult(
     val hopelessness: Float = calculateGroup(HOPELESSNESS_IDS)
     val homelessness: Float = calculateGroup(HOMELESSNESS_IDS)
 
-    override fun answerToValue(value: Int): Int {
+    override fun answerToValue(value: Int, id: Int): Int {
         return when(value) {
-            0, 1 -> 0
+            0 -> 0
             else -> value - 1
         }
     }

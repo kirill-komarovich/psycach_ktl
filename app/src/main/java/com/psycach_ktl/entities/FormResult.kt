@@ -9,12 +9,12 @@ open class FormResult(val methodologyType: MethodologyTypes, open val items: Lis
     protected open fun calculateGroup(groupIds: List<Int>, offset: Int = 0): Float {
         val groupItems = items.filter { groupIds.contains(it.id) }
         val values = groupItems.map {
-            formResultItem -> answerToValue(formResultItem.value) + offset
+            formResultItem -> answerToValue(formResultItem.value, formResultItem.id) + offset
         }
         return values.sum().toFloat()
     }
 
-    protected open fun answerToValue(value: Int): Int  = value
+    protected open fun answerToValue(value: Int, id: Int): Int  = value
 
     companion object {
         fun from(formParcel: FormParcel) : FormResult {

@@ -19,10 +19,14 @@ data class SanResult(override val items: List<FormResultItem>) : FormResult(Meth
     }
 
     override fun calculateGroup(groupIds: List<Int>, offset: Int): Float {
-        val updatedGroupIds = groupIds.map { id ->
-            if(INVERTED_IDS.indexOf(id) == -1) id else id * -1
-        } // TODO: fix
-        return super.calculateGroup(updatedGroupIds, offset) / groupIds.size
+        return super.calculateGroup(groupIds, offset) / groupIds.size
+    }
+
+    override fun answerToValue(value: Int, id: Int): Int {
+        return when {
+            INVERTED_IDS.contains(id) -> -value
+            else -> value
+        }
     }
 
     companion object {
