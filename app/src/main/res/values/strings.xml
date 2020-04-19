@@ -411,4 +411,5 @@
     <string name="btn_submit">Получить результаты</string>
     <string name="error_presence_all">Перед получением результатов Вы должны ответить на все вопросы</string>
     <string name="about_methodology">Справка</string>
+    <string name="sign_in">Войти</string>
 </resources>
