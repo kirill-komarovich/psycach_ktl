@@ -24,6 +24,7 @@ open class FormResult(val methodologyType: MethodologyTypes, open val items: Lis
                 MethodologyTypes.SAN -> SanResult(items)
                 MethodologyTypes.MENTAL_STATES -> MentalStatesResult(items)
                 MethodologyTypes.JERSILD -> JersildResult(items)
+                MethodologyTypes.ALARM_SCALE -> AlarmScaleResult(items)
                 else -> throw IllegalArgumentException("Unknown FormResult for ${formParcel.methodologyType} methodology")
             }
         }

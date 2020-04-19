@@ -14,6 +14,7 @@ open class ResultViewModel : ViewModel() {
                     SanResultViewModel::class.java -> SanResultViewModel(formResult as SanResult)
                     MentalStatesResultViewModel::class.java -> MentalStatesResultViewModel(formResult as MentalStatesResult)
                     JersildResultViewModel::class.java -> JersildResultViewModel(formResult as JersildResult)
+                    AlarmScaleResultViewModel::class.java -> AlarmScaleResultViewModel(formResult as AlarmScaleResult)
                     else -> ResultViewModel()
                 } as T
             }

@@ -9,7 +9,6 @@ import com.psycach_ktl.R
 import com.psycach_ktl.enums.MethodologyTypes
 import com.psycach_ktl.fragments.result.*
 
-
 class ResultFragment : Fragment() {
     private lateinit var currentFragment: Fragment
 
@@ -45,6 +44,7 @@ class ResultFragment : Fragment() {
             MethodologyTypes.SAN -> SanResultFragment()
             MethodologyTypes.MENTAL_STATES -> MentalStatesResultFragment()
             MethodologyTypes.JERSILD -> JersildResultFragment()
+            MethodologyTypes.ALARM_SCALE -> AlarmScaleResultFragment()
             else -> throw IllegalArgumentException("Unknown ResultFragment for $methodologyType")
         }
     }

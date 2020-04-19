@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.psycach_ktl.viewmodels.result.AlarmScaleResultViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".fragments.result.AlarmScaleResultFragment">
+
+            <TextView
+                android:id="@+id/alarm_scale_situation_anxiety_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:resultLevel="@{viewModel.situationalAnxietyLevel.toLowerCase()}"
+                app:resultKey='@{"situation_anxiety"}'
+                app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
+                app:resultValue="@{viewModel.formResult.situationalAnxiety}"
+                tools:text="@string/alarm_scale_average_situation_anxiety" />
+
+            <TextView
+                android:id="@+id/alarm_scale_personal_anxiety_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alarm_scale_situation_anxiety_result"
+                app:resultLevel="@{viewModel.personalAnxietyLevel.toLowerCase()}"
+                app:resultKey='@{"personal_anxiety"}'
+                app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
+                app:resultValue="@{viewModel.formResult.personalAnxiety}"
+                tools:text="@string/alarm_scale_average_personal_anxiety" />
+
+            <TextView
+                android:id="@+id/alarm_scale_result_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/alarm_scale_result_details"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alarm_scale_personal_anxiety_result" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
