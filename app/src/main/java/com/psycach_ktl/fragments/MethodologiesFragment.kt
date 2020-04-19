@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.psycach_ktl.databinding.MethodologiesFragmentBinding
-import com.psycach_ktl.R
 import com.psycach_ktl.adapters.MethodologiesAdapter
 import com.psycach_ktl.entities.Methodology
 import com.psycach_ktl.viewmodels.MethodologiesViewModel
@@ -34,12 +32,8 @@ class MethodologiesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.methodologies_fragment,
-            container,
-            false
-        )
+        binding = MethodologiesFragmentBinding.inflate(inflater)
+
         binding.methodologiesList.adapter = adapter
         binding.lifecycleOwner = this
 

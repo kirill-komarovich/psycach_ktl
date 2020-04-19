@@ -2,7 +2,6 @@ package com.psycach_ktl.fragments
 
 import android.os.Bundle
 import android.view.*
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -29,12 +28,8 @@ class MethodologyInstructionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.methodology_instructions_fragment,
-            container,
-            false
-        )
+        binding = MethodologyInstructionsFragmentBinding.inflate(inflater)
+
         binding.instuctionsViewModel = viewModel
         binding.lifecycleOwner = this
         binding.startButton.setOnClickListener {

@@ -11,9 +11,6 @@ class JersildResultViewModel(formResult: JersildResult) : ResultViewModel() {
     val formResult: LiveData<JersildResult>
         get() = _formResult
 
-    private val result: JersildResult
-        get() = _formResult.value!!
-
     init {
         _formResult.value = formResult
     }

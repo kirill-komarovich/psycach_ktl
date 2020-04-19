@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.psycach_ktl.R
 import com.psycach_ktl.databinding.AboutMethodologyFragmentBinding
 import com.psycach_ktl.viewmodels.MethodologyInstructionsViewModel
 
@@ -29,14 +27,11 @@ class AboutMethodologyFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.about_methodology_fragment,
-            container,
-            false
-        )
+        binding = AboutMethodologyFragmentBinding.inflate(inflater)
+
         binding.instuctionsViewModel = viewModel
         binding.lifecycleOwner = this
+
         return binding.root
     }
 }

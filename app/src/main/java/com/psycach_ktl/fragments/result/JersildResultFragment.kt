@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.psycach_ktl.R
 import com.psycach_ktl.databinding.JersildResultFragmentBinding
 import com.psycach_ktl.entities.FormResult
 import com.psycach_ktl.fragments.ResultFragmentArgs
@@ -33,12 +31,7 @@ class JersildResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.jersild_result_fragment,
-            container,
-            false
-        )
+        binding = JersildResultFragmentBinding.inflate(inflater, container, false)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
