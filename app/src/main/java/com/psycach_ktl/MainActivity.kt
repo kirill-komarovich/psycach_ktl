@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.lifecycleOwner = this
         initAuth()
         initNavigation()
     }
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
             updateUI(it)
             updateLoading(false)
         })
+
+        binding.authViewModel = authViewModel
     }
 
     private fun initNavigation() {

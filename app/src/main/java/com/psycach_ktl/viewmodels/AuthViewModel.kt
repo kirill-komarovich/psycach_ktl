@@ -14,7 +14,7 @@ import kotlinx.coroutines.tasks.await
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
-    val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestIdToken(application.getString(R.string.default_web_client_id))
@@ -23,14 +23,29 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private val googleSignInClient: GoogleSignInClient = GoogleSignIn.getClient(application, googleSignInOptions)
 
-    private val _authenticationState = MutableLiveData<AuthenticationState>()
     private val _authenticationType = MutableLiveData<AuthenticationTypes>()
+    private val _authenticationState = MutableLiveData<AuthenticationState>()
     val authenticationState: LiveData<AuthenticationState>
         get() = _authenticationState
 
+    private val _currentUser = MutableLiveData<FirebaseUser>(auth.currentUser)
+    val currentUser: LiveData<FirebaseUser>
+        get() = _currentUser
+
     init {
-        _authenticationState.value = if (auth.currentUser != null) AuthenticationState.AUTHENTICATED
+        _authenticationState.value = if (currentUser.value != null) AuthenticationState.AUTHENTICATED
                                         else AuthenticationState.UNAUTHENTICATED
+
+        auth.addAuthStateListener { firebaseAuth ->
+            val user = firebaseAuth.currentUser
+            _currentUser.value = user
+            user?.let {
+                _authenticationState.value = AuthenticationState.AUTHENTICATED
+            } ?: run {
+                _authenticationState.value = AuthenticationState.UNAUTHENTICATED
+                _authenticationType.value = null
+            }
+        }
     }
 
     fun signInUser(): Intent {
@@ -41,8 +56,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             socialSignOut()
             auth.signOut()
-            _authenticationState.value = AuthenticationState.UNAUTHENTICATED
-            _authenticationType.value = null
         }
     }
 
@@ -64,18 +77,14 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private suspend fun firebaseAuthWithGoogle(account: GoogleSignInAccount): FirebaseUser? {
+    private suspend fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
 
-        return try {
-            val result = auth.signInWithCredential(credential).await()
-            _authenticationState.value = AuthenticationState.AUTHENTICATED
+        try {
+            auth.signInWithCredential(credential).await()
             _authenticationType.value = AuthenticationTypes.GOOGLE
-            result.user
         } catch (e: FirebaseAuthException) {
             Log.w("AuthViewModel", "signInWithCredential:failure", e)
-            _authenticationState.value = AuthenticationState.UNAUTHENTICATED
-            null
         }
     }
 

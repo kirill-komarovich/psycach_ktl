@@ -2,4 +2,6 @@
 <resources>
     <dimen name="methodology_title_size">16sp</dimen>
     <dimen name="slider_label_size">14sp</dimen>
+    <dimen name="drawer_header_email_size">14sp</dimen>
+    <dimen name="drawer_header_display_name_size">12sp</dimen>
 </resources>

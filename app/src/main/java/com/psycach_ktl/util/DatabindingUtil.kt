@@ -1,8 +1,12 @@
 package com.psycach_ktl.util
 
 import android.content.res.Resources
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.psycach_ktl.entities.FormItem.*
 
 @BindingAdapter("translatedValue")
@@ -59,4 +63,14 @@ fun setResultLabel(view: TextView, value: Float, key: String, prefix: String) {
     val label = res.getString(labelName)
 
     view.text = String.format(label, value)
+}
+
+@BindingAdapter(value = ["imageUrl", "imagePlaceholder"], requireAll = true)
+fun setImageByUrl(view: ImageView, imageUrl: String?, placeholder: Drawable) {
+    Glide.with(view.context)
+        .load(imageUrl)
+        .placeholder(placeholder)
+        .error(placeholder)
+        .apply(RequestOptions.circleCropTransform())
+        .into(view)
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="authViewModel"
+            type="com.psycach_ktl.viewmodels.AuthViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:id="@+id/user_photo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/user_profile_photo"
+            app:imagePlaceholder="@{@drawable/ic_baseline_account_circle_48_light}"
+            app:imageUrl="@{authViewModel.currentUser.photoUrl.toString()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_baseline_account_circle_48_light" />
+
+        <TextView
+            android:id="@+id/user_display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{authViewModel.currentUser.displayName ?? @string/unknown_user}"
+            android:textAppearance="@style/Widget.MaterialComponents.TextView"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/drawer_header_display_name_size"
+            app:layout_constraintStart_toEndOf="@+id/user_photo"
+            app:layout_constraintTop_toTopOf="@+id/user_photo"
+            tools:text="User Name" />
+
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{authViewModel.currentUser.email}"
+            android:textAppearance="@style/Widget.MaterialComponents.TextView"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/drawer_header_email_size"
+            app:layout_constraintBottom_toBottomOf="@+id/user_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/user_photo"
+            tools:text="Email" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

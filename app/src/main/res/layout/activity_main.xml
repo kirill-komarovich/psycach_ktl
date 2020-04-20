@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="authViewModel"
+            type="com.psycach_ktl.viewmodels.AuthViewModel" />
+    </data>
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -48,11 +54,19 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView
+            xmlns:bind="http://schemas.android.com/apk/res-auto"
             android:id="@+id/navigation_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:menu="@menu/main_drawer_menu" />
+            app:headerLayout="@layout/main_drawer_menu_header"
+            app:menu="@menu/main_drawer_menu" >
+
+            <include
+                layout="@layout/main_drawer_menu_header"
+                bind:authViewModel="@{authViewModel}" />
+
+        </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

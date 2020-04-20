@@ -413,4 +413,7 @@
     <string name="about_methodology">Справка</string>
     <string name="sign_in">Войти</string>
     <string name="sign_out">Выйти</string>
+
+    <string name="unknown_user">Неизвестный пользователь</string>
+    <string name="user_profile_photo">User Profile Photo</string>
 </resources>
