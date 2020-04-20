@@ -412,4 +412,5 @@
     <string name="error_presence_all">Перед получением результатов Вы должны ответить на все вопросы</string>
     <string name="about_methodology">Справка</string>
     <string name="sign_in">Войти</string>
+    <string name="sign_out">Выйти</string>
 </resources>

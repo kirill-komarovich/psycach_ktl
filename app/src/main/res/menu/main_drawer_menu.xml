@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/sign_in" />
+    <item
+        android:id="@+id/sign_out_button"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:title="@string/sign_out"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/sign_in_button"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/sign_in"
+        android:visible="true" />
 </menu>
