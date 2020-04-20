@@ -23,7 +23,7 @@ class MentalStatesResultViewModel(formResult: MentalStatesResult) : ResultViewMo
     val rigidityLevel: ResultLevels
         get() = result.groupLevel(result.rigidity)
 
-    private val result: MentalStatesResult
+    override val result: MentalStatesResult
         get() = _formResult.value!!
 
     init {

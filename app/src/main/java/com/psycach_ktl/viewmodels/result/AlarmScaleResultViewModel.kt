@@ -18,7 +18,7 @@ class AlarmScaleResultViewModel(formResult: AlarmScaleResult) : ResultViewModel(
     val personalAnxietyLevel: ResultLevels
         get() = result.groupLevel(result.personalAnxiety)
 
-    private val result: AlarmScaleResult
+    override val result: AlarmScaleResult
         get() = _formResult.value!!
 
     init {
