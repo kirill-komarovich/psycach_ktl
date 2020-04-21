@@ -55,4 +55,8 @@
             android:name="methodologyType"
             app:argType="com.psycach_ktl.enums.MethodologyTypes" />
     </fragment>
+    <fragment
+        android:id="@+id/history_fragment"
+        android:name="com.psycach_ktl.fragments.HistoryFragment"
+        android:label="@string/history_fragment_label" />
 </navigation>

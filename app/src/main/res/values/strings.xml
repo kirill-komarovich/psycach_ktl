@@ -407,12 +407,14 @@
     <string name="instructions_fragment_label">Иструкция</string>
     <string name="form_fragment_label">Прохождение методики</string>
     <string name="result_fragment_label">Результаты</string>
+    <string name="history_fragment_label">История</string>
     <string name="btn_start">Начать</string>
     <string name="btn_submit">Получить результаты</string>
     <string name="error_presence_all">Перед получением результатов Вы должны ответить на все вопросы</string>
     <string name="about_methodology">Справка</string>
     <string name="sign_in">Войти</string>
     <string name="sign_out">Выйти</string>
+    <string name="history_button">История</string>
 
     <string name="unknown_user">Неизвестный пользователь</string>
     <string name="user_profile_photo">User Profile Photo</string>

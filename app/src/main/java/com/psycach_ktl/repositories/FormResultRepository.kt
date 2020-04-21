@@ -7,6 +7,18 @@ import kotlinx.coroutines.tasks.await
 class FormResultRepository(private val userId: String? = null) : BaseRepository {
     private val collection = database.collection(COLLECTION_NAME)
 
+    suspend fun findAll(page: Int, perPage: Int, userIds: List<String?> = listOf(userId)): List<FormResult>? {
+        val result = collection
+            .whereIn("userId", userIds)
+            .limit(perPage.toLong())
+            .get()
+            .await()
+
+        val objects = result.toObjects(FormResult::class.java).toList()
+        Log.d("FormResultRepository", objects.joinToString(", "))
+        return objects
+    }
+
     suspend fun save(formResult: FormResult) {
         Log.d("FormResultRepository", "formResult $formResult")
 
@@ -19,7 +31,7 @@ class FormResultRepository(private val userId: String? = null) : BaseRepository 
                 val formResultItemRef = itemsCollection.document(item.id)
                 batch.set(formResultItemRef, item)
             }
-        }
+        }.await()
     }
 
     companion object {

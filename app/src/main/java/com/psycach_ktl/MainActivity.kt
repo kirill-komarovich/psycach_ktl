@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                     updateLoading(true)
                     authViewModel.signOutUser()
                 }
+                else -> navController.navigate(item.itemId)
             }
             true
         }
@@ -92,6 +93,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateDrawer(authenticated: Boolean) {
         binding.apply {
             navigationView.menu.findItem(R.id.sign_out_button).isVisible = authenticated
+            navigationView.menu.findItem(R.id.history_fragment).isVisible = authenticated
             navigationView.menu.findItem(R.id.sign_in_button).isVisible = !authenticated
         }
     }
