@@ -29,7 +29,7 @@ sealed class FormItem {
             get() = super.getLabelKey(labelKeyPrefix, "max")
 
         override fun toParcel(): FormItemParcel? {
-            return FormItemParcel(id, value)
+            return FormItemParcel(id.toString(), value)
         }
     }
 
@@ -45,7 +45,7 @@ sealed class FormItem {
             get() = super.getLabelKey(labelKeyPrefix, "answers")
 
         override fun toParcel(): FormItemParcel? {
-            return FormItemParcel(id, value)
+            return FormItemParcel(id.toString(), value)
         }
     }
 

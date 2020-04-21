@@ -16,7 +16,7 @@ abstract class ResultViewModel(result: FormResult) : ViewModel() {
         _formResult.value = result
     }
 
-    protected open fun calculateGroup(groupIds: List<Int>, offset: Int = 0): Float {
+    protected open fun calculateGroup(groupIds: List<String>, offset: Int = 0): Float {
         val groupItems = formResult.value!!.items.filter { groupIds.contains(it.id) }
         val values = groupItems.map {
                 formResultItem -> answerToValue(formResultItem.value, formResultItem.id) + offset
@@ -24,7 +24,7 @@ abstract class ResultViewModel(result: FormResult) : ViewModel() {
         return values.sum().toFloat()
     }
 
-    protected open fun answerToValue(value: Int, id: Int): Int  = value
+    protected open fun answerToValue(value: Int, id: String): Int  = value
 
     fun saveResult(userId: String) {
         viewModelScope.launch {

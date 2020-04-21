@@ -1,3 +1,9 @@
 package com.psycach_ktl.entities
 
-data class FormResultItem(val id: Int, val value: Int)
+import com.google.firebase.firestore.DocumentId
+
+data class FormResultItem(
+    @DocumentId
+    val id: String,
+    val value: Int
+)

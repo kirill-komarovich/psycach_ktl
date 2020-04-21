@@ -15,7 +15,7 @@ class JersildResultViewModel(result: FormResult) : ResultViewModel(result) {
     val hopelessness: Float = calculateGroup(HOPELESSNESS_IDS)
     val homelessness: Float = calculateGroup(HOMELESSNESS_IDS)
 
-    override fun answerToValue(value: Int, id: Int): Int {
+    override fun answerToValue(value: Int, id: String): Int {
         return when(value) {
             0 -> 0
             else -> value - 1
@@ -23,14 +23,14 @@ class JersildResultViewModel(result: FormResult) : ResultViewModel(result) {
     }
 
     companion object {
-        private val LONELINESS_IDS = listOf(6, 14, 19, 33)
-        private val MEANINGLESSNESS_IDS = listOf(3, 10, 22, 32)
-        private val FREEDOM_IDS = listOf(4, 20, 23, 33)
-        private val SEXUAL_CONFLICT_IDS = listOf(2, 11, 16, 28)
-        private val HOSTILE_CONFLICT_IDS = listOf(7, 24, 29, 31)
-        private val DISCREPANCY_IDS = listOf(1, 13, 21, 26)
-        private val STRENGTH_OF_WILL_IDS = listOf(0, 8, 17, 27)
-        private val HOPELESSNESS_IDS = listOf(5, 9, 25, 30)
-        private val HOMELESSNESS_IDS = listOf(12, 15, 18, 35)
+        private val LONELINESS_IDS = listOf("6", "14", "19", "33")
+        private val MEANINGLESSNESS_IDS = listOf("3", "10", "22", "32")
+        private val FREEDOM_IDS = listOf("4", "20", "23", "33")
+        private val SEXUAL_CONFLICT_IDS = listOf("2", "11", "16", "28")
+        private val HOSTILE_CONFLICT_IDS = listOf("7", "24", "29", "31")
+        private val DISCREPANCY_IDS = listOf("1", "13", "21", "26")
+        private val STRENGTH_OF_WILL_IDS = listOf("0", "8", "17", "27")
+        private val HOPELESSNESS_IDS = listOf("5", "9", "25", "30")
+        private val HOMELESSNESS_IDS = listOf("12", "15", "18", "35")
     }
 }
