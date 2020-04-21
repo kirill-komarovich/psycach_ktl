@@ -32,7 +32,7 @@
                 app:resultLevel="@{viewModel.situationalAnxietyLevel.toLowerCase()}"
                 app:resultKey='@{"situation_anxiety"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.situationalAnxiety}"
+                app:resultValue="@{viewModel.situationalAnxiety}"
                 tools:text="@string/alarm_scale_average_situation_anxiety" />
 
             <TextView
@@ -49,7 +49,7 @@
                 app:resultLevel="@{viewModel.personalAnxietyLevel.toLowerCase()}"
                 app:resultKey='@{"personal_anxiety"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.personalAnxiety}"
+                app:resultValue="@{viewModel.personalAnxiety}"
                 tools:text="@string/alarm_scale_average_personal_anxiety" />
 
             <TextView

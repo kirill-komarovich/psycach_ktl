@@ -92,8 +92,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         GOOGLE
     }
 
-    @Suppress("UNCHECKED_CAST")
     class Factory(private val application: Application) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
                 return AuthViewModel(application) as T

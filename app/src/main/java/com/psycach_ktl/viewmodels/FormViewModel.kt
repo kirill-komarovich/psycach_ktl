@@ -21,6 +21,7 @@ class FormViewModel(form: Form) : ViewModel() {
 
 
     class Factory(val methodologyType: MethodologyTypes) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(FormViewModel::class.java)) {
                 val form = Form.build(methodologyType)

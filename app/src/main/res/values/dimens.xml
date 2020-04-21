@@ -4,4 +4,5 @@
     <dimen name="slider_label_size">14sp</dimen>
     <dimen name="drawer_header_email_size">14sp</dimen>
     <dimen name="drawer_header_display_name_size">12sp</dimen>
+    <dimen name="jersidl_result_group_size">20sp</dimen>
 </resources>

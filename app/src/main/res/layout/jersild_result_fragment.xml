@@ -38,13 +38,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/Widget.MaterialComponents.TextView"
+                android:textSize="@dimen/jersidl_result_group_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jersild_result_details"
                 app:resultKey='@{"loneliness"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.loneliness}"
+                app:resultValue="@{viewModel.loneliness}"
                 tools:text="@string/jersild_loneliness" />
 
             <TextView
@@ -54,13 +55,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/Widget.MaterialComponents.TextView"
+                android:textSize="@dimen/jersidl_result_group_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jersild_loneliness_result"
                 app:resultKey='@{"meaninglessness"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.meaninglessness}"
+                app:resultValue="@{viewModel.meaninglessness}"
                 tools:text="@string/jersild_meaninglessness" />
 
             <TextView
@@ -70,13 +72,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/Widget.MaterialComponents.TextView"
+                android:textSize="@dimen/jersidl_result_group_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jersild_meaninglessness_result"
                 app:resultKey='@{"freedom"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.freedom}"
+                app:resultValue="@{viewModel.freedom}"
                 tools:text="@string/jersild_freedom" />
 
             <TextView
@@ -86,13 +89,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/Widget.MaterialComponents.TextView"
+                android:textSize="@dimen/jersidl_result_group_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jersild_freedom_result"
                 app:resultKey='@{"sexual_conflict"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.sexualConflict}"
+                app:resultValue="@{viewModel.sexualConflict}"
                 tools:text="@string/jersild_sexual_conflict" />
 
             <TextView
@@ -102,13 +106,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/Widget.MaterialComponents.TextView"
+                android:textSize="@dimen/jersidl_result_group_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jersild_sexual_conflict_result"
                 app:resultKey='@{"hostile_conflict"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.hostileConflict}"
+                app:resultValue="@{viewModel.hostileConflict}"
                 tools:text="@string/jersild_hostile_conflict" />
 
             <TextView
@@ -118,13 +123,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/Widget.MaterialComponents.TextView"
+                android:textSize="@dimen/jersidl_result_group_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jersild_hostile_conflict_result"
                 app:resultKey='@{"discrepancy"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.discrepancy}"
+                app:resultValue="@{viewModel.discrepancy}"
                 tools:text="@string/jersild_discrepancy" />
 
             <TextView
@@ -134,13 +140,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/Widget.MaterialComponents.TextView"
+                android:textSize="@dimen/jersidl_result_group_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jersild_discrepancy_result"
                 app:resultKey='@{"strength_of_will"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.strengthOfWill}"
+                app:resultValue="@{viewModel.strengthOfWill}"
                 tools:text="@string/jersild_strength_of_will" />
 
             <TextView
@@ -150,13 +157,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/Widget.MaterialComponents.TextView"
+                android:textSize="@dimen/jersidl_result_group_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jersild_strength_of_will_result"
                 app:resultKey='@{"hopelessness"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.hopelessness}"
+                app:resultValue="@{viewModel.hopelessness}"
                 tools:text="@string/jersild_hopelessness" />
 
             <TextView
@@ -167,14 +175,15 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/Widget.MaterialComponents.TextView"
+                android:textSize="@dimen/jersidl_result_group_size"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/jersild_hopelessness_result"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:resultKey='@{"homelessness"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.homelessness}"
+                app:resultValue="@{viewModel.homelessness}"
                 tools:text="@string/jersild_homelessness" />
 
 

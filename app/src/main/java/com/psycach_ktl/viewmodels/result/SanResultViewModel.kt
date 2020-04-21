@@ -1,41 +1,47 @@
 package com.psycach_ktl.viewmodels.result
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.psycach_ktl.entities.results.SanResult
+import com.psycach_ktl.entities.FormResult
 import com.psycach_ktl.enums.ResultLevels
-import com.psycach_ktl.repositories.FormResultRepository
 import com.psycach_ktl.viewmodels.ResultViewModel
-import kotlinx.coroutines.launch
 
-class SanResultViewModel(formResult: SanResult) : ResultViewModel() {
-    private var _formResult = MutableLiveData<SanResult>()
-    val formResult: LiveData<SanResult>
-        get() = _formResult
+class SanResultViewModel(result: FormResult) : ResultViewModel(result) {
+    val health: Float = calculateGroup(HEALTH_IDS, ANSWER_OFFSET)
+    val activity: Float = calculateGroup(ACTIVITY_IDS, ANSWER_OFFSET)
+    val mood: Float = calculateGroup(MOOD_IDS, ANSWER_OFFSET)
 
     val healthLevel: ResultLevels
-        get() = result.groupLevel(result.health)
+        get() = groupLevel(health)
 
     val activityLevel: ResultLevels
-        get() = result.groupLevel(result.activity)
+        get() = groupLevel(activity)
 
     val moodLevel: ResultLevels
-        get() = result.groupLevel(result.mood)
+        get() = groupLevel(mood)
 
-    override val result: SanResult
-        get() = _formResult.value!!
-
-    init {
-        _formResult.value = formResult
+    override fun calculateGroup(groupIds: List<Int>, offset: Int): Float {
+        return super.calculateGroup(groupIds, offset) / groupIds.size
     }
 
-//    fun saveResult(userId: String) {
-//        viewModelScope.launch {
-//            result.userId = userId
-//
-//            formResultRepository.save(result)
-//        }
-//    }
+    override fun answerToValue(value: Int, id: Int): Int {
+        return when {
+            INVERTED_IDS.contains(id) -> -value
+            else -> value
+        }
+    }
+
+    private fun groupLevel(value: Float): ResultLevels {
+        return when {
+            value >= 7 -> ResultLevels.GOOD
+            value >= 4 -> ResultLevels.AVERAGE
+            else -> ResultLevels.LOW
+        }
+    }
+
+    companion object {
+        private const val ANSWER_OFFSET = 4
+        private val HEALTH_IDS = listOf(0, 1, 6, 7, 12, 13, 18, 19, 24, 25)
+        private val ACTIVITY_IDS = listOf(2, 3, 8, 9, 14, 15, 20, 22, 26, 27)
+        private val MOOD_IDS = listOf(4, 5, 10, 11, 16, 17, 22, 23, 28, 29)
+        private val INVERTED_IDS = listOf(0, 1, 4, 5, 6, 7, 10, 11, 13, 16, 17, 18, 19, 23, 24, 25, 28, 29)
+    }
 }

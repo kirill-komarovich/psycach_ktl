@@ -14,6 +14,7 @@ class MethodologiesViewModel(methodologies: List<Methodology>) : ViewModel() {
     }
 
     class Factory(private var methodologies: List<Methodology>) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MethodologiesViewModel::class.java)) {
                 return MethodologiesViewModel(methodologies) as T

@@ -32,7 +32,7 @@
                 app:resultKey='@{"anxiety"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
                 app:resultLevel="@{viewModel.anxietyLevel.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.anxiety}"
+                app:resultValue="@{viewModel.anxiety}"
                 tools:text="@string/mental_states_average_anxiety" />
 
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_marginEnd="16dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:resultLevel="@{viewModel.frustrationLevel.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.frustration}"
+                app:resultValue="@{viewModel.frustration}"
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
                 app:resultKey='@{"frustration"}'
                 tools:text="@string/mental_states_average_frustration"
@@ -87,7 +87,7 @@
                 android:layout_marginEnd="16dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:resultLevel="@{viewModel.aggressivenessLevel.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.aggressiveness}"
+                app:resultValue="@{viewModel.aggressiveness}"
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
                 app:resultKey='@{"aggressiveness"}'
                 tools:text="@string/mental_states_average_aggressiveness"
@@ -117,7 +117,7 @@
                 android:layout_marginEnd="16dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:resultLevel="@{viewModel.rigidityLevel.toLowerCase()}"
-                app:resultValue="@{viewModel.formResult.rigidity}"
+                app:resultValue="@{viewModel.rigidity}"
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
                 app:resultKey='@{"rigidity"}'
                 tools:text="@string/mental_states_average_rigidity"
