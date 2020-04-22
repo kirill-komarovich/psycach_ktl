@@ -1,9 +1,9 @@
 package com.psycach_ktl.viewmodels.result
 
 import com.psycach_ktl.entities.FormResult
-import com.psycach_ktl.viewmodels.ResultViewModel
+import com.psycach_ktl.viewmodels.FormResultViewModel
 
-class JersildResultViewModel(result: FormResult) : ResultViewModel(result) {
+class JersildResultViewModel(result: FormResult) : FormResultViewModel(result) {
 
     val loneliness: Float = calculateGroup(LONELINESS_IDS)
     val meaninglessness: Float = calculateGroup(MEANINGLESSNESS_IDS)

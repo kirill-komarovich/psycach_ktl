@@ -15,13 +15,11 @@ data class FormResult(
     var id: String = "",
     val methodologyType: MethodologyTypes? = null,
     @get:Exclude
-    val items: List<FormResultItem>,
+    var items: List<FormResultItem> = emptyList(),
     var userId: String? = null,
     @ServerTimestamp
     var createdAt: Timestamp? = null
 ) {
-
-    constructor() : this(items = emptyList())
 
     fun toParcel() : FormResultParcel = FormResultParcel(id, methodologyType, userId!!, createdAt!!)
 
@@ -35,10 +33,13 @@ data class FormResult(
         }
 
         fun from(formResultParcel: FormResultParcel) : FormResult {
-//            val items = formResultParcel.items.map { FormResultItem(it.id, it.value) }
-
-//            return FormResult(methodologyType = formParcel.methodologyType, items = items)
-            return FormResult()
+            return FormResult(
+                id = formResultParcel.id,
+                methodologyType = formResultParcel.methodologyType,
+                items = emptyList(),
+                userId = formResultParcel.userId,
+                createdAt = formResultParcel.createdAt
+            )
         }
 
     }

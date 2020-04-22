@@ -2,9 +2,11 @@ package com.psycach_ktl.util
 
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingConversion
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.psycach_ktl.entities.FormItem.*
@@ -84,4 +86,9 @@ fun setDateToFormat(view: TextView, dateToFormat: Date?) {
         val date = dateFormat.format(dateToFormat)
         view.text = date
     }
+}
+
+@BindingConversion
+fun convertBooleanToVisibility(visible: Boolean): Int {
+    return if (visible) View.VISIBLE else View.GONE
 }

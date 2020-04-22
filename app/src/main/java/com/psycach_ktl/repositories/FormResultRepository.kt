@@ -3,6 +3,7 @@ package com.psycach_ktl.repositories
 import android.util.Log
 import com.google.firebase.firestore.Query
 import com.psycach_ktl.entities.FormResult
+import com.psycach_ktl.entities.FormResultItem
 import kotlinx.coroutines.tasks.await
 
 class FormResultRepository : BaseRepository {
@@ -23,6 +24,14 @@ class FormResultRepository : BaseRepository {
                 batch.set(formResultItemRef, item)
             }
         }.await()
+    }
+
+    suspend fun itemsFor(id: String): List<FormResultItem> {
+        val itemsRef = collection.document(id).collection(ITEMS_COLLECTION_NAME)
+
+        val result = itemsRef.get().await()
+
+        return result.toObjects(FormResultItem::class.java).toList()
     }
 
     companion object {

@@ -4,6 +4,6 @@ import com.google.firebase.firestore.DocumentId
 
 data class FormResultItem(
     @DocumentId
-    val id: String,
-    val value: Int
+    var id: String = "",
+    var value: Int = -1
 )

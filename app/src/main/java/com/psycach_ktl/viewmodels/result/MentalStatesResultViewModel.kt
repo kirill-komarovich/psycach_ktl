@@ -2,9 +2,9 @@ package com.psycach_ktl.viewmodels.result
 
 import com.psycach_ktl.entities.FormResult
 import com.psycach_ktl.enums.ResultLevels
-import com.psycach_ktl.viewmodels.ResultViewModel
+import com.psycach_ktl.viewmodels.FormResultViewModel
 
-class MentalStatesResultViewModel(result: FormResult) : ResultViewModel(result) {
+class MentalStatesResultViewModel(result: FormResult) : FormResultViewModel(result) {
     val anxiety: Float = calculateGroup(ANXIETY_IDS)
     val frustration: Float = calculateGroup(FRUSTRATION_IDS)
     val aggressiveness: Float = calculateGroup(AGGRESSIVENESS_IDS)

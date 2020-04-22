@@ -2,9 +2,9 @@ package com.psycach_ktl.viewmodels.result
 
 import com.psycach_ktl.entities.FormResult
 import com.psycach_ktl.enums.ResultLevels
-import com.psycach_ktl.viewmodels.ResultViewModel
+import com.psycach_ktl.viewmodels.FormResultViewModel
 
-class SanResultViewModel(result: FormResult) : ResultViewModel(result) {
+class SanResultViewModel(result: FormResult) : FormResultViewModel(result) {
     val health: Float = calculateGroup(HEALTH_IDS, ANSWER_OFFSET)
     val activity: Float = calculateGroup(ACTIVITY_IDS, ANSWER_OFFSET)
     val mood: Float = calculateGroup(MOOD_IDS, ANSWER_OFFSET)

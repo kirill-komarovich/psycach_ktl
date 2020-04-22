@@ -5,51 +5,68 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.psycach_ktl.R
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.psycach_ktl.databinding.ResultFragmentBinding
+import com.psycach_ktl.entities.FormResult
 import com.psycach_ktl.enums.MethodologyTypes
 import com.psycach_ktl.fragments.result.*
+import com.psycach_ktl.viewmodels.ResultViewModel
 
 class ResultFragment : Fragment() {
-    private lateinit var currentFragment: Fragment
+    private lateinit var binding: ResultFragmentBinding
+    private lateinit var viewModel: ResultViewModel
+    private lateinit var viewModelFactory: ResultViewModel.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val args = ResultFragmentArgs.fromBundle(requireArguments())
-        val methodologyType = when {
-            args.formParcel != null -> args.formParcel.methodologyType
-            args.formResultParcel != null -> args.formResultParcel.methodologyType
+        val formResult = when {
+            args.formParcel != null -> FormResult.from(args.formParcel)
+            args.formResultParcel != null -> FormResult.from(args.formResultParcel)
             else -> null
-        }
-        currentFragment = fragmentFrom(methodologyType!!)
-        currentFragment.arguments = arguments
+        }!!
+        viewModelFactory = ResultViewModel.Factory(formResult)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ResultViewModel::class.java)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        applyCurrentFragment()
+        binding = ResultFragmentBinding.inflate(inflater)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
-        return inflater.inflate(R.layout.result_fragment, container, false)
+        viewModel.isReady.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                applyCurrentFragment()
+
+            }
+        })
+
+        return binding.root
     }
 
 
     private fun applyCurrentFragment() {
         val fragmentTransaction = parentFragmentManager.beginTransaction()
 
-        fragmentTransaction.add(R.id.result_fragment_container, currentFragment)
+        val formResult = viewModel.result.value!!
+        fragmentTransaction.add(binding.resultFragmentContainer.id, fragmentFor(formResult))
 
         fragmentTransaction.commit()
     }
 
-    private fun fragmentFrom(methodologyType: MethodologyTypes): Fragment {
-        return when(methodologyType) {
-            MethodologyTypes.SAN -> SanResultFragment()
-            MethodologyTypes.MENTAL_STATES -> MentalStatesResultFragment()
-            MethodologyTypes.JERSILD -> JersildResultFragment()
-            MethodologyTypes.ALARM_SCALE -> AlarmScaleResultFragment()
-            else -> throw IllegalArgumentException("Unknown ResultFragment for $methodologyType")
+    private fun fragmentFor(formResult: FormResult): Fragment {
+        return when(formResult.methodologyType) {
+            MethodologyTypes.SAN -> SanResultFragment(formResult)
+            MethodologyTypes.MENTAL_STATES -> MentalStatesResultFragment(formResult)
+            MethodologyTypes.JERSILD -> JersildResultFragment(formResult)
+            MethodologyTypes.ALARM_SCALE -> AlarmScaleResultFragment(formResult)
+            else -> throw IllegalArgumentException("Unknown ResultFragment for ${formResult.methodologyType}")
         }
     }
 }

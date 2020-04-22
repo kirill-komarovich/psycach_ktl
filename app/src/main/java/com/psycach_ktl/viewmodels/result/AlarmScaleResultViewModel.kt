@@ -2,9 +2,9 @@ package com.psycach_ktl.viewmodels.result
 
 import com.psycach_ktl.entities.FormResult
 import com.psycach_ktl.enums.ResultLevels
-import com.psycach_ktl.viewmodels.ResultViewModel
+import com.psycach_ktl.viewmodels.FormResultViewModel
 
-class AlarmScaleResultViewModel(result: FormResult) : ResultViewModel(result) {
+class AlarmScaleResultViewModel(result: FormResult) : FormResultViewModel(result) {
 
     val situationalAnxiety: Float = calculateGroup(SITUATION_ANXIETY_IDS, RESULT_OFFSET) + SITUATIONAL_ANXIETY_OFFSET
     val personalAnxiety: Float = calculateGroup(PERSONAL_ANXIETY_IDS, RESULT_OFFSET) + PERSONAL_ANXIETY_OFFSET

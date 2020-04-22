@@ -11,14 +11,15 @@ import com.psycach_ktl.BR
 import com.psycach_ktl.entities.FormResult
 import com.psycach_ktl.enums.AuthenticationState
 import com.psycach_ktl.viewmodels.AuthViewModel
-import com.psycach_ktl.viewmodels.ResultViewModel
+import com.psycach_ktl.viewmodels.FormResultViewModel
 
-abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:ResultViewModel>(
+abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:FormResultViewModel>(
     private val bindingClass: Class<BindingT>,
-    private val viewModelClass: Class<ViewModelT>
+    private val viewModelClass: Class<ViewModelT>,
+    private val formResult: FormResult
 ): Fragment() {
     private lateinit var binding: BindingT
-    private lateinit var viewModelFactory: ResultViewModel.Factory
+    private lateinit var viewModelFactoryForm: FormResultViewModel.Factory
     private val authViewModel: AuthViewModel by lazy {
         ViewModelProvider(this).get(AuthViewModel::class.java)
     }
@@ -27,14 +28,9 @@ abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:ResultVie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val args = ResultFragmentArgs.fromBundle(requireArguments())
-        val formResult = when {
-            args.formParcel != null -> FormResult.from(args.formParcel)
-            args.formResultParcel != null -> FormResult.from(args.formResultParcel)
-            else -> null
-        }!!
-        viewModelFactory = ResultViewModel.Factory(formResult)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(viewModelClass)
+
+        viewModelFactoryForm = FormResultViewModel.Factory(formResult)
+        viewModel = ViewModelProvider(this, viewModelFactoryForm).get(viewModelClass)
 
         if (formResult.isNewRecord()) saveResult()
     }
