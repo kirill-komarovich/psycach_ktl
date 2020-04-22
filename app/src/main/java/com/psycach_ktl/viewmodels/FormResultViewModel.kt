@@ -2,19 +2,12 @@ package com.psycach_ktl.viewmodels
 
 import androidx.lifecycle.*
 import com.psycach_ktl.entities.FormResult
-import com.psycach_ktl.repositories.FormResultRepository
 import com.psycach_ktl.viewmodels.result.*
-import kotlinx.coroutines.launch
 
 abstract class FormResultViewModel(result: FormResult) : ViewModel() {
-    private val formResultRepository = FormResultRepository()
-    private var _formResult = MutableLiveData<FormResult>()
+    private var _formResult = MutableLiveData(result)
     val formResult: LiveData<FormResult>
         get() = _formResult
-
-    init {
-        _formResult.value = result
-    }
 
     protected open fun calculateGroup(groupIds: List<String>, offset: Int = 0): Float {
         val groupItems = formResult.value!!.items.filter { groupIds.contains(it.id) }
@@ -25,15 +18,6 @@ abstract class FormResultViewModel(result: FormResult) : ViewModel() {
     }
 
     protected open fun answerToValue(value: Int, id: String): Int  = value
-
-    fun saveResult(userId: String) {
-        viewModelScope.launch {
-            val result = formResult.value!!
-            result.userId = userId
-
-            formResultRepository.save(result)
-        }
-    }
 
     class Factory(private val result: FormResult) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")

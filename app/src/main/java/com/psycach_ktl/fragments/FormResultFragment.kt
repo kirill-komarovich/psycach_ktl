@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.psycach_ktl.BR
 import com.psycach_ktl.entities.FormResult
-import com.psycach_ktl.enums.AuthenticationState
-import com.psycach_ktl.viewmodels.AuthViewModel
 import com.psycach_ktl.viewmodels.FormResultViewModel
 
 abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:FormResultViewModel>(
@@ -20,9 +18,6 @@ abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:FormResul
 ): Fragment() {
     private lateinit var binding: BindingT
     private lateinit var viewModelFactoryForm: FormResultViewModel.Factory
-    private val authViewModel: AuthViewModel by lazy {
-        ViewModelProvider(this).get(AuthViewModel::class.java)
-    }
 
     private lateinit var viewModel: ViewModelT
 
@@ -31,8 +26,6 @@ abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:FormResul
 
         viewModelFactoryForm = FormResultViewModel.Factory(formResult)
         viewModel = ViewModelProvider(this, viewModelFactoryForm).get(viewModelClass)
-
-        if (formResult.isNewRecord()) saveResult()
     }
 
     override fun onCreateView(
@@ -46,11 +39,5 @@ abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:FormResul
         binding.lifecycleOwner = this
 
         return binding.root
-    }
-
-    private fun saveResult() {
-        if (authViewModel.authenticationState.value == AuthenticationState.AUTHENTICATED) {
-            viewModel.saveResult(authViewModel.currentUser.value!!.uid)
-        }
     }
 }

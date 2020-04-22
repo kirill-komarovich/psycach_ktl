@@ -9,14 +9,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.psycach_ktl.databinding.ResultFragmentBinding
 import com.psycach_ktl.entities.FormResult
+import com.psycach_ktl.enums.AuthenticationState
 import com.psycach_ktl.enums.MethodologyTypes
 import com.psycach_ktl.fragments.result.*
+import com.psycach_ktl.viewmodels.AuthViewModel
 import com.psycach_ktl.viewmodels.ResultViewModel
 
 class ResultFragment : Fragment() {
     private lateinit var binding: ResultFragmentBinding
     private lateinit var viewModel: ResultViewModel
     private lateinit var viewModelFactory: ResultViewModel.Factory
+    private val authViewModel: AuthViewModel by lazy {
+        ViewModelProvider(this).get(AuthViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +34,10 @@ class ResultFragment : Fragment() {
         }!!
         viewModelFactory = ResultViewModel.Factory(formResult)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ResultViewModel::class.java)
+
+        if (authViewModel.authenticationState.value == AuthenticationState.AUTHENTICATED) {
+            viewModel.processResult(authViewModel.currentUser.value!!.uid)
+        }
     }
 
     override fun onCreateView(
@@ -49,7 +58,6 @@ class ResultFragment : Fragment() {
 
         return binding.root
     }
-
 
     private fun applyCurrentFragment() {
         val fragmentTransaction = parentFragmentManager.beginTransaction()
