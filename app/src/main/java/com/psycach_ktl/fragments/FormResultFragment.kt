@@ -34,6 +34,7 @@ abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:FormResul
         savedInstanceState: Bundle?
     ): View? {
         val inflateMethod = bindingClass.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
+        @Suppress("UNCHECKED_CAST")
         binding = inflateMethod.invoke(null, inflater, container, false) as BindingT
         binding.setVariable(BR.viewModel, viewModel)
         binding.lifecycleOwner = this

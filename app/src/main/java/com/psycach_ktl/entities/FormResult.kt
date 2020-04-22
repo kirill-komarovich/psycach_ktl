@@ -23,6 +23,7 @@ data class FormResult(
 
     fun toParcel() : FormResultParcel = FormResultParcel(id, methodologyType, userId!!, createdAt!!)
 
+    @Exclude
     fun isNewRecord(): Boolean = id.isBlank()
 
     companion object {

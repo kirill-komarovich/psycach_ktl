@@ -89,7 +89,7 @@ class FormItemsAdapter(private val submitListener: SubmitListener): ListAdapter<
 
         private fun applyButtons(radioGroup: RadioGroup, item: RadioButtonGroupItem) {
             if (radioGroup.childCount > 0) {
-                item.value?.let { radioGroup.check(it) } ?: radioGroup.clearCheck()
+                radioGroup.check(item.value)
                 return
             }
 
