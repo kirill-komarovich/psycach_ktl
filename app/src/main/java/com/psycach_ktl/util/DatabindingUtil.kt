@@ -8,6 +8,8 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.psycach_ktl.entities.FormItem.*
+import java.text.DateFormat.getDateTimeInstance
+import java.util.*
 
 @BindingAdapter("translatedValue")
 fun TextView.setTranslatedValue(item: String?) {
@@ -50,8 +52,8 @@ fun TextView.setQuestionLabel(item: RadioButtonGroupItem?) {
 @BindingAdapter(value = ["resultLevel", "resultValue", "resultKey", "resultKeyPrefix"], requireAll = true)
 fun setResultLabel(view: TextView, level: String, value: Float, key: String, prefix: String) {
     val res: Resources = view.context.resources
-    val labelName = res.getIdentifier("${prefix}_${level}_${key}", "string",  view.context.packageName)
-    val label = res.getString(labelName)
+    val labelId = res.getIdentifier("${prefix}_${level}_${key}", "string",  view.context.packageName)
+    val label = res.getString(labelId)
 
     view.text = String.format(label, value)
 }
@@ -73,4 +75,13 @@ fun setImageByUrl(view: ImageView, imageUrl: String?, placeholder: Drawable) {
         .error(placeholder)
         .apply(RequestOptions.circleCropTransform())
         .into(view)
+}
+
+@BindingAdapter("dateToFormat")
+fun setDateToFormat(view: TextView, dateToFormat: Date?) {
+    dateToFormat?.let {
+        val dateFormat = getDateTimeInstance()
+        val date = dateFormat.format(dateToFormat)
+        view.text = date
+    }
 }

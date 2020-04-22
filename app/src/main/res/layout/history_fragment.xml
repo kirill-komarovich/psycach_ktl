@@ -11,21 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ProgressBar
+            android:id="@+id/history_list_progress_bar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/history_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/history_list_progress_bar"
+            app:layout_constraintBottom_toTopOf="@+id/history_list_additional_progress_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/history_list_item" />
 
         <ProgressBar
-            android:id="@+id/history_list_progress_bar"
+            android:id="@+id/history_list_additional_progress_bar"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:visibility="gone"

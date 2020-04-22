@@ -1,28 +1,30 @@
 package com.psycach_ktl.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.ListAdapter
+import com.firebase.ui.firestore.paging.FirestorePagingAdapter
+import com.firebase.ui.firestore.paging.FirestorePagingOptions
+import com.firebase.ui.firestore.paging.LoadingState
 import com.psycach_ktl.databinding.HistoryListItemBinding
 import com.psycach_ktl.entities.FormResult
 
 class HistoryAdapter(
+    options: FirestorePagingOptions<FormResult>,
     private val clickListener: Listener,
-    private val onBottomReachedListener: OnBottomReachedListener
-) : ListAdapter<FormResult, HistoryAdapter.ViewHolder>(DiffCallback()) {
+    private val loadingStateChangedListener: LoadingStateChangedListener
+) : FirestorePagingAdapter<FormResult, HistoryAdapter.ViewHolder>(options) {
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position == itemCount - 1) onBottomReachedListener.onBottomReached(position)
-
-        val item = getItem(position)
-        holder.bind(item!!, clickListener)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: FormResult) {
+        holder.bind(model, clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
+    }
+
+    override fun onLoadingStateChanged(state: LoadingState) {
+        loadingStateChangedListener.onLoadingStateChanged(state)
     }
 
     class ViewHolder private constructor(val binding: HistoryListItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -42,22 +44,11 @@ class HistoryAdapter(
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<FormResult>() {
-        override fun areItemsTheSame(oldItem: FormResult, newItem: FormResult): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: FormResult, newItem: FormResult): Boolean {
-            return oldItem == newItem
-        }
-    }
-
     class Listener(val clickListener: (FormResult: FormResult) -> Unit) {
         fun onClick(FormResult: FormResult) = clickListener(FormResult)
     }
 
-    class OnBottomReachedListener(val onBottomReachedListener: (position: Int) -> Unit) {
-        fun onBottomReached(position: Int) = onBottomReachedListener(position)
+    class LoadingStateChangedListener(val loadingStateChangedListener: (state: LoadingState) -> Unit) {
+        fun onLoadingStateChanged(state: LoadingState) = loadingStateChangedListener(state)
     }
 }

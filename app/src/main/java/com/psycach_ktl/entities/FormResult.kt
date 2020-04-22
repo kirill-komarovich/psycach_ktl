@@ -11,7 +11,6 @@ import com.google.firebase.firestore.ServerTimestamp
 @IgnoreExtraProperties
 data class FormResult(
     @DocumentId
-    @get:Exclude
     var id: String = "",
     val methodologyType: MethodologyTypes? = null,
     @get:Exclude
