@@ -24,7 +24,7 @@ class FormFragment : Fragment() {
         val form = viewModel.form.value!!
         if (form.isValid()) {
             this.findNavController()
-                .navigate(FormFragmentDirections.actionFormToResult(form.toParcel()))
+                .navigate(FormFragmentDirections.actionFormToResult(formParcel =  form.toParcel()))
         } else {
             errorSnackbar.show()
         }

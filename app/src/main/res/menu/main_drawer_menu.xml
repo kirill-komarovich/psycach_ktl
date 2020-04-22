@@ -9,7 +9,7 @@
         android:visible="true" />
 
     <item
-        android:id="@+id/history_fragment"
+        android:id="@+id/history"
         android:icon="@drawable/ic_baseline_history_24"
         android:title="@string/history_button"
         android:visible="false"

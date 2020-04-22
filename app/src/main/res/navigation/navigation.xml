@@ -44,7 +44,14 @@
         android:label="@string/result_fragment_label">
         <argument
             android:name="formParcel"
-            app:argType="com.psycach_ktl.parcels.FormParcel" />
+            app:argType="com.psycach_ktl.parcels.FormParcel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="formResultParcel"
+            app:argType="com.psycach_ktl.parcels.FormResultParcel"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/about_methodology_fragment"
@@ -56,7 +63,11 @@
             app:argType="com.psycach_ktl.enums.MethodologyTypes" />
     </fragment>
     <fragment
-        android:id="@+id/history_fragment"
+        android:id="@+id/history"
         android:name="com.psycach_ktl.fragments.HistoryFragment"
-        android:label="@string/history_fragment_label" />
+        android:label="@string/history_fragment_label" >
+        <action
+            android:id="@+id/action_history_to_result"
+            app:destination="@id/result" />
+    </fragment>
 </navigation>

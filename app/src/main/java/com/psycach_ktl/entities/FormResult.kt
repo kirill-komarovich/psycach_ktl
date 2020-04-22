@@ -7,6 +7,7 @@ import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.ServerTimestamp
+import com.psycach_ktl.parcels.FormResultParcel
 
 @IgnoreExtraProperties
 data class FormResult(
@@ -20,15 +21,24 @@ data class FormResult(
     var createdAt: Timestamp? = null
 ) {
 
-    constructor() : this(
-        items = emptyList()
-    )
+    constructor() : this(items = emptyList())
+
+    fun toParcel() : FormResultParcel = FormResultParcel(id, methodologyType, userId!!, createdAt!!)
+
+    fun isNewRecord(): Boolean = id.isBlank()
 
     companion object {
         fun from(formParcel: FormParcel) : FormResult {
             val items = formParcel.items.map { FormResultItem(it.id, it.value) }
 
             return FormResult(methodologyType = formParcel.methodologyType, items = items)
+        }
+
+        fun from(formResultParcel: FormResultParcel) : FormResult {
+//            val items = formResultParcel.items.map { FormResultItem(it.id, it.value) }
+
+//            return FormResult(methodologyType = formParcel.methodologyType, items = items)
+            return FormResult()
         }
 
     }

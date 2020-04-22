@@ -15,9 +15,13 @@ class ResultFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val args = ResultFragmentArgs.fromBundle(arguments!!)
-        val methodologyType = args.formParcel.methodologyType
-        currentFragment = fragmentFrom(methodologyType)
+        val args = ResultFragmentArgs.fromBundle(requireArguments())
+        val methodologyType = when {
+            args.formParcel != null -> args.formParcel.methodologyType
+            args.formResultParcel != null -> args.formResultParcel.methodologyType
+            else -> null
+        }
+        currentFragment = fragmentFrom(methodologyType!!)
         currentFragment.arguments = arguments
     }
 

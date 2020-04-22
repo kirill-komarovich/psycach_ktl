@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.firebase.ui.firestore.paging.LoadingState
 import com.psycach_ktl.adapters.HistoryAdapter
 import com.psycach_ktl.databinding.HistoryFragmentBinding
@@ -24,6 +25,9 @@ class HistoryFragment : Fragment() {
     private lateinit var adapter: HistoryAdapter
     private val onItemClickListener = HistoryAdapter.Listener {
         Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+        this.findNavController().navigate(
+            HistoryFragmentDirections.actionHistoryToResult(formResultParcel = it.toParcel())
+        )
     }
     private val onLoadingStateChangedListener = HistoryAdapter.LoadingStateChangedListener {
         when(it) {
@@ -60,9 +64,9 @@ class HistoryFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.listQuery.observe(viewLifecycleOwner, Observer {
-            val options = viewModel.buildPagingOptions(it)
+            val newOptions = viewModel.buildPagingOptions(it)
 
-            adapter.updateOptions(options)
+            adapter.updateOptions(newOptions)
         })
 
         return binding.root

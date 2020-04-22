@@ -18,7 +18,7 @@ class MethodologyInstructionsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val args = MethodologyInstructionsFragmentArgs.fromBundle(arguments!!)
+        val args = MethodologyInstructionsFragmentArgs.fromBundle(requireArguments())
 
         viewModelFactory = MethodologyInstructionsViewModel.Factory(args.methodologyType)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MethodologyInstructionsViewModel::class.java)
@@ -53,7 +53,7 @@ class MethodologyInstructionsFragment : Fragment() {
 
                 aboutBundle.putSerializable("methodologyType", viewModel.methodologyType.value!!)
 
-                view!!.findNavController().navigate(R.id.about_methodology_fragment, aboutBundle)
+                requireView().findNavController().navigate(R.id.about_methodology_fragment, aboutBundle)
                 true
             }
             else -> super.onOptionsItemSelected(item)
