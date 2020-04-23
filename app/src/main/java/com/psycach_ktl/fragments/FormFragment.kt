@@ -12,28 +12,29 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.psycach_ktl.R
 import com.psycach_ktl.adapters.FormItemsAdapter
+import com.psycach_ktl.builders.SnackbarBuilder
 import com.psycach_ktl.databinding.FormFragmentBinding
 import com.psycach_ktl.viewmodels.FormViewModel
 
 class FormFragment : Fragment() {
-    private lateinit var errorSnackbar: Snackbar
     private lateinit var binding: FormFragmentBinding
     private lateinit var viewModel: FormViewModel
     private lateinit var viewModelFactory: FormViewModel.Factory
+    private lateinit var snackbarBuilder: SnackbarBuilder
     private var adapter = FormItemsAdapter(FormItemsAdapter.SubmitListener {
         val form = viewModel.form.value!!
         if (form.isValid()) {
             this.findNavController()
                 .navigate(FormFragmentDirections.actionFormToResult(formParcel =  form.toParcel()))
         } else {
-            errorSnackbar.show()
+            snackbarBuilder.error(R.string.error_presence_all)
         }
     })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val args = FormFragmentArgs.fromBundle(arguments!!)
+        val args = FormFragmentArgs.fromBundle(requireArguments())
 
         viewModelFactory = FormViewModel.Factory(args.methodologyType)
         viewModel = ViewModelProvider(this, viewModelFactory).get(FormViewModel::class.java)
@@ -53,13 +54,8 @@ class FormFragment : Fragment() {
                 adapter.submitList(formItems)
             }
         })
-        makeErrorSnackbar(container!!)
+        snackbarBuilder = SnackbarBuilder(container!!)
 
         return binding.root
-    }
-
-    private fun makeErrorSnackbar(root: ViewGroup) {
-        errorSnackbar = Snackbar.make(root, R.string.error_presence_all, Snackbar.LENGTH_LONG)
-        errorSnackbar.view.setBackgroundColor(Color.RED)
     }
 }

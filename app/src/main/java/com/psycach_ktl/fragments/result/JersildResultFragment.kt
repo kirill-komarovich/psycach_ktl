@@ -5,8 +5,5 @@ import com.psycach_ktl.entities.FormResult
 import com.psycach_ktl.fragments.FormResultFragment
 import com.psycach_ktl.viewmodels.result.JersildResultViewModel
 
-class JersildResultFragment(formResult: FormResult) : FormResultFragment<JersildResultFragmentBinding, JersildResultViewModel>(
-    JersildResultFragmentBinding::class.java,
-    JersildResultViewModel::class.java,
-    formResult
-)
+class JersildResultFragment(formResult: FormResult) :
+    FormResultFragment<JersildResultFragmentBinding, JersildResultViewModel>(formResult)
