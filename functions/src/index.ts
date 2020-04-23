@@ -1,8 +1,17 @@
 import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+admin.initializeApp();
+
+export const userCreated = functions.auth.user().onCreate((user) => {
+  // TODO: find if exist
+  return admin.firestore().collection('users').doc(user.uid).set({
+    email: user.email,
+    displayName: user.displayName,
+    active: true,
+  })
+})
+
+export const userDeleted = functions.auth.user().onCreate((user) => {
+  return admin.firestore().collection('users').doc(user.uid).set({ active: false }, { merge: true })
+})
