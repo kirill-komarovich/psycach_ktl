@@ -11,14 +11,14 @@ import androidx.navigation.fragment.findNavController
 import com.firebase.ui.firestore.paging.LoadingState
 import com.psycach_ktl.adapters.HistoryAdapter
 import com.psycach_ktl.databinding.HistoryFragmentBinding
-import com.psycach_ktl.repositories.FormResultRepository
 import com.psycach_ktl.viewmodels.AuthViewModel
 import com.psycach_ktl.viewmodels.HistoryViewModel
+import com.psycach_ktl.viewmodels.LoaderViewModel
 
 class HistoryFragment : Fragment() {
     private lateinit var binding: HistoryFragmentBinding
     private lateinit var authViewModel: AuthViewModel
-    private lateinit var formResultRepository: FormResultRepository
+    private lateinit var loaderViewModel: LoaderViewModel
     private lateinit var viewModelFactory: HistoryViewModel.Factory
     private lateinit var viewModel: HistoryViewModel
     private lateinit var adapter: HistoryAdapter
@@ -29,7 +29,7 @@ class HistoryFragment : Fragment() {
     }
     private val onLoadingStateChangedListener = HistoryAdapter.LoadingStateChangedListener {
         when(it) {
-            LoadingState.LOADING_INITIAL -> binding.historyListProgressBar.visibility = View.VISIBLE
+            LoadingState.LOADING_INITIAL -> loaderViewModel.start()
             LoadingState.LOADING_MORE -> binding.historyListAdditionalProgressBar.visibility = View.VISIBLE
             LoadingState.LOADED -> hideLoaders()
             LoadingState.FINISHED -> hideLoaders()
@@ -40,8 +40,11 @@ class HistoryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        authViewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
-        formResultRepository = FormResultRepository()
+        activity?.let {
+            authViewModel = ViewModelProvider(it).get(AuthViewModel::class.java)
+            loaderViewModel = ViewModelProvider(it).get(LoaderViewModel::class.java)
+        }
+
         viewModelFactory = HistoryViewModel.Factory()
         viewModel = ViewModelProvider(this, viewModelFactory).get(HistoryViewModel::class.java)
     }
@@ -71,9 +74,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun hideLoaders() {
-        binding.apply {
-            historyListProgressBar.visibility = View.GONE
-            historyListAdditionalProgressBar.visibility = View.GONE
-        }
+        loaderViewModel.stop()
+        binding.historyListAdditionalProgressBar.visibility = View.GONE
     }
 }

@@ -9,22 +9,10 @@
             type="com.psycach_ktl.viewmodels.ResultViewModel" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.ResultFragment" >
-
-        <!-- TODO: move loaders sizes to dimens -->
-        <ProgressBar
-            android:id="@+id/result_progress_bar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:visibility="@{!viewModel.isReady}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/result_fragment_container"

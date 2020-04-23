@@ -13,18 +13,23 @@ import com.psycach_ktl.enums.AuthenticationState
 import com.psycach_ktl.enums.MethodologyTypes
 import com.psycach_ktl.fragments.result.*
 import com.psycach_ktl.viewmodels.AuthViewModel
+import com.psycach_ktl.viewmodels.LoaderViewModel
 import com.psycach_ktl.viewmodels.ResultViewModel
 
 class ResultFragment : Fragment() {
     private lateinit var binding: ResultFragmentBinding
     private lateinit var viewModel: ResultViewModel
     private lateinit var viewModelFactory: ResultViewModel.Factory
-    private val authViewModel: AuthViewModel by lazy {
-        ViewModelProvider(this).get(AuthViewModel::class.java)
-    }
+    private lateinit var authViewModel: AuthViewModel
+    private lateinit var loaderViewModel: LoaderViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        activity?.let {
+            authViewModel = ViewModelProvider(it).get(AuthViewModel::class.java)
+            loaderViewModel = ViewModelProvider(it).get(LoaderViewModel::class.java)
+        }
 
         val args = ResultFragmentArgs.fromBundle(requireArguments())
         val formResult = when {
@@ -51,8 +56,10 @@ class ResultFragment : Fragment() {
 
         viewModel.isReady.observe(viewLifecycleOwner, Observer {
             if (it) {
+                loaderViewModel.stop()
                 applyCurrentFragment()
-
+            } else {
+                loaderViewModel.start()
             }
         })
 

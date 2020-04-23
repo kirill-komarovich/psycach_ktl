@@ -7,6 +7,10 @@
         <variable
             name="authViewModel"
             type="com.psycach_ktl.viewmodels.AuthViewModel" />
+
+        <variable
+            name="loaderViewModel"
+            type="com.psycach_ktl.viewmodels.LoaderViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -18,7 +22,7 @@
             android:id="@+id/progress_circular"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            android:visibility="@{loaderViewModel.isLoading}"
             tools:context=".MainActivity"
             tools:visibility="visible">
 
@@ -35,6 +39,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragment_content"
+            android:visibility="@{!loaderViewModel.isLoading}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".MainActivity">

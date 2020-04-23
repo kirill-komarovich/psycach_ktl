@@ -415,10 +415,19 @@
     <string name="about_methodology">Справка</string>
     <string name="sign_in">Войти</string>
     <string name="sign_out">Выйти</string>
+    <string name="upgrade_account">Улучшить аккаунт</string>
     <string name="history_button">История</string>
 
     <string name="unknown_user">Неизвестный пользователь</string>
     <string name="user_profile_photo">User Profile Photo</string>
+
+    <string name="upgrade_account_dialog_title">Улучшить аккаунт?</string>
+    <string name="upgrade_account_dialog_message">
+        Вы можете улучшить свой аккаунт до аккаунта Психолога, чтобы получать доступ к истории приглашенных пользователей
+        \nСтоимость улучшения: 5$
+    </string>
+    <string name="upgrade_account_dialog_accept">Улучшить</string>
+    <string name="upgrade_account_dialog_cancel">Отмена</string>
 
     <string name="dummy_formatted_date">22 апр. 2020 г. 3:12:55 PM</string>
 </resources>

@@ -50,9 +50,7 @@ class FormFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.formItems.observe(viewLifecycleOwner, Observer {
-            it?.let { formItems ->
-                adapter.submitList(formItems)
-            }
+            it?.let { formItems -> adapter.submitList(formItems) }
         })
         snackbarBuilder = SnackbarBuilder(container!!)
 

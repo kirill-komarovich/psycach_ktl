@@ -3,6 +3,7 @@ package com.psycach_ktl
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -11,25 +12,38 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.psycach_ktl.builders.DialogBuilder
 import com.psycach_ktl.databinding.ActivityMainBinding
 import com.psycach_ktl.enums.ActivityResultCodes
 import com.psycach_ktl.enums.AuthenticationState
 import com.psycach_ktl.viewmodels.AuthViewModel
+import com.psycach_ktl.viewmodels.LoaderViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-    private lateinit var drawerLayout: DrawerLayout
     private lateinit var binding: ActivityMainBinding
+    private lateinit var loaderViewModel: LoaderViewModel
+    private lateinit var loaderViewModelFactory: LoaderViewModel.Factory
     private lateinit var authViewModel: AuthViewModel
     private lateinit var authViewModelFactory: AuthViewModel.Factory
+    private lateinit var dialogBuilder: DialogBuilder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        dialogBuilder = DialogBuilder(this)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
+        initLoader()
         initAuth()
         initNavigation()
+    }
+
+    private fun initLoader() {
+        loaderViewModelFactory = LoaderViewModel.Factory(true)
+        loaderViewModel = ViewModelProvider(this, loaderViewModelFactory).get(LoaderViewModel::class.java)
+        binding.loaderViewModel = loaderViewModel
     }
 
     private fun initAuth() {
@@ -38,14 +52,14 @@ class MainActivity : AppCompatActivity() {
 
         authViewModel.authenticationState.observe(this, Observer {
             updateUI(it)
-            updateLoading(false)
+            loaderViewModel.stop()
         })
 
         binding.authViewModel = authViewModel
     }
 
     private fun initNavigation() {
-        drawerLayout = binding.drawerLayout
+        val drawerLayout = binding.drawerLayout
         navController = this.findNavController(R.id.nav_host_fragment)
         navController.addOnDestinationChangedListener { controller, destination, _ ->
             when(destination.id) {
@@ -58,21 +72,28 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.sign_in_button -> {
-                    updateLoading(true)
+                    binding.drawerLayout.closeDrawers()
                     startActivityForResult(authViewModel.signInUser(), ActivityResultCodes.SIGN_IN.ordinal)
                 }
                 R.id.sign_out_button -> {
-                    updateLoading(true)
+                    binding.drawerLayout.closeDrawers()
                     authViewModel.signOutUser()
                 }
+                R.id.upgrade_account_button -> buildDialog()
                 else -> navController.navigate(item.itemId)
             }
             true
         }
     }
 
+    private fun buildDialog() {
+        dialogBuilder.buildUpgradeAccountDialog { dialog, which ->
+            Toast.makeText(this, "accepted", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController, drawerLayout)
+        return NavigationUI.navigateUp(navController, binding.drawerLayout)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -92,22 +113,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateDrawer(authenticated: Boolean) {
         binding.apply {
-            navigationView.menu.findItem(R.id.sign_out_button).isVisible = authenticated
-            navigationView.menu.findItem(R.id.history).isVisible = authenticated
-            navigationView.menu.findItem(R.id.sign_in_button).isVisible = !authenticated
-        }
-    }
-
-    private fun updateLoading(loading: Boolean) {
-        drawerLayout.closeDrawers()
-        binding.apply {
-            if (loading) {
-                progressCircular.visibility = View.VISIBLE
-                fragmentContent.visibility = View.GONE
-            } else {
-                progressCircular.visibility = View.GONE
-                fragmentContent.visibility = View.VISIBLE
-            }
+            val menu = navigationView.menu
+            menu.findItem(R.id.sign_out_button).isVisible = authenticated
+            menu.findItem(R.id.history).isVisible = authenticated
+            menu.findItem(R.id.upgrade_account_button).isVisible = authenticated
+            menu.findItem(R.id.sign_in_button).isVisible = !authenticated
         }
     }
 }
