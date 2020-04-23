@@ -17,7 +17,7 @@ class AboutMethodologyFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val args = AboutMethodologyFragmentArgs.fromBundle(arguments!!)
+        val args = AboutMethodologyFragmentArgs.fromBundle(requireArguments())
 
         viewModelFactory = MethodologyInstructionsViewModel.Factory(args.methodologyType)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MethodologyInstructionsViewModel::class.java)

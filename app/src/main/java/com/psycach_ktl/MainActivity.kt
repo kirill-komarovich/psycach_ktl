@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -22,10 +23,8 @@ import com.psycach_ktl.viewmodels.LoaderViewModel
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
-    private lateinit var loaderViewModel: LoaderViewModel
-    private lateinit var loaderViewModelFactory: LoaderViewModel.Factory
-    private lateinit var authViewModel: AuthViewModel
-    private lateinit var authViewModelFactory: AuthViewModel.Factory
+    private val loaderViewModel: LoaderViewModel by viewModels { LoaderViewModel.Factory(true) }
+    private val authViewModel: AuthViewModel by viewModels { AuthViewModel.Factory(application) }
     private lateinit var dialogBuilder: DialogBuilder
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,15 +40,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initLoader() {
-        loaderViewModelFactory = LoaderViewModel.Factory(true)
-        loaderViewModel = ViewModelProvider(this, loaderViewModelFactory).get(LoaderViewModel::class.java)
         binding.loaderViewModel = loaderViewModel
     }
 
     private fun initAuth() {
-        authViewModelFactory = AuthViewModel.Factory(application)
-        authViewModel = ViewModelProvider(this, authViewModelFactory).get(AuthViewModel::class.java)
-
         authViewModel.authenticationState.observe(this, Observer {
             updateUI(it)
             loaderViewModel.stop()
@@ -73,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.sign_in_button -> {
                     binding.drawerLayout.closeDrawers()
+                    loaderViewModel.start()
                     startActivityForResult(authViewModel.signInUser(), ActivityResultCodes.SIGN_IN.ordinal)
                 }
                 R.id.sign_out_button -> {
@@ -89,6 +84,7 @@ class MainActivity : AppCompatActivity() {
     private fun buildDialog() {
         dialogBuilder.buildUpgradeAccountDialog { dialog, which ->
             Toast.makeText(this, "accepted", Toast.LENGTH_SHORT).show()
+
         }
     }
 
