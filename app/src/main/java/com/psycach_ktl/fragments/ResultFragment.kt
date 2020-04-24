@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.psycach_ktl.databinding.ResultFragmentBinding
 import com.psycach_ktl.entities.FormResult
-import com.psycach_ktl.enums.AuthenticationState
 import com.psycach_ktl.enums.MethodologyTypes
 import com.psycach_ktl.fragments.result.*
-import com.psycach_ktl.viewmodels.AuthViewModel
 import com.psycach_ktl.viewmodels.LoaderViewModel
 import com.psycach_ktl.viewmodels.ResultViewModel
 
@@ -20,16 +19,10 @@ class ResultFragment : Fragment() {
     private lateinit var binding: ResultFragmentBinding
     private lateinit var viewModel: ResultViewModel
     private lateinit var viewModelFactory: ResultViewModel.Factory
-    private lateinit var authViewModel: AuthViewModel
-    private lateinit var loaderViewModel: LoaderViewModel
+    private val loaderViewModel: LoaderViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        activity?.let {
-            authViewModel = ViewModelProvider(it).get(AuthViewModel::class.java)
-            loaderViewModel = ViewModelProvider(it).get(LoaderViewModel::class.java)
-        }
 
         val args = ResultFragmentArgs.fromBundle(requireArguments())
         val formResult = when {
@@ -40,9 +33,7 @@ class ResultFragment : Fragment() {
         viewModelFactory = ResultViewModel.Factory(formResult)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ResultViewModel::class.java)
 
-        if (authViewModel.authenticationState.value == AuthenticationState.AUTHENTICATED) {
-            viewModel.processResult(authViewModel.currentUser.value!!.uid)
-        }
+        viewModel.processResult()
     }
 
     override fun onCreateView(

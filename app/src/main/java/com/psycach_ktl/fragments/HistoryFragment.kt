@@ -5,21 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.firebase.ui.firestore.paging.LoadingState
 import com.psycach_ktl.adapters.HistoryAdapter
 import com.psycach_ktl.databinding.HistoryFragmentBinding
-import com.psycach_ktl.viewmodels.AuthViewModel
 import com.psycach_ktl.viewmodels.HistoryViewModel
 import com.psycach_ktl.viewmodels.LoaderViewModel
 
 class HistoryFragment : Fragment() {
     private lateinit var binding: HistoryFragmentBinding
-    private lateinit var authViewModel: AuthViewModel
-    private lateinit var loaderViewModel: LoaderViewModel
-    private lateinit var viewModelFactory: HistoryViewModel.Factory
+    private val loaderViewModel: LoaderViewModel by activityViewModels()
     private lateinit var viewModel: HistoryViewModel
     private lateinit var adapter: HistoryAdapter
     private val onItemClickListener = HistoryAdapter.Listener {
@@ -40,13 +38,7 @@ class HistoryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activity?.let {
-            authViewModel = ViewModelProvider(it).get(AuthViewModel::class.java)
-            loaderViewModel = ViewModelProvider(it).get(LoaderViewModel::class.java)
-        }
-
-        viewModelFactory = HistoryViewModel.Factory()
-        viewModel = ViewModelProvider(this, viewModelFactory).get(HistoryViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -54,9 +46,8 @@ class HistoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val userId = authViewModel.currentUser.value!!.uid
         val options = viewModel.buildPagingOptions(
-            viewModel.initialQuery(userId),
+            viewModel.initialQuery(),
             viewLifecycleOwner
         )
         adapter = HistoryAdapter(options, onItemClickListener, onLoadingStateChangedListener)
