@@ -16,7 +16,7 @@
         tools:visible="true" />
 
     <item
-        android:id="@+id/upgrade_account_button"
+        android:id="@+id/upgrade_account"
         android:icon="@drawable/ic_baseline_add_shopping_cart_24"
         android:title="@string/upgrade_account"
         android:visible="false"

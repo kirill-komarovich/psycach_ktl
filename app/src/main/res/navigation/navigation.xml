@@ -70,4 +70,8 @@
             android:id="@+id/action_history_to_result"
             app:destination="@id/result" />
     </fragment>
+    <fragment
+        android:id="@+id/upgrade_account"
+        android:name="com.psycach_ktl.fragments.UpgradeAccountFragment"
+        android:label="@string/upgrade_account_fragment_label" />
 </navigation>
