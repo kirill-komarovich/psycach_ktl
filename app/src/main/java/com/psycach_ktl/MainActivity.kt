@@ -12,7 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.psycach_ktl.databinding.ActivityMainBinding
 import com.psycach_ktl.enums.ActivityResultCodes
-import com.psycach_ktl.enums.AuthenticationState
+import com.psycach_ktl.managers.AuthorizationManager
 import com.psycach_ktl.viewmodels.AuthViewModel
 import com.psycach_ktl.viewmodels.LoaderViewModel
 
@@ -22,13 +22,10 @@ class MainActivity : AppCompatActivity() {
     private val loaderViewModel: LoaderViewModel by viewModels { LoaderViewModel.Factory(true) }
     private val authViewModel: AuthViewModel by viewModels { AuthViewModel.Factory(application) }
 
-    // private lateinit var snackbarBuilder: SnackbarBuilder
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        // snackbarBuilder = SnackbarBuilder(binding.root as ViewGroup)
         binding.lifecycleOwner = this
         initLoader()
         initAuth()
@@ -41,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAuth() {
         authViewModel.authenticationState.observe(this, Observer {
-            updateUI(it)
+            updateDrawer()
             loaderViewModel.stop()
         })
 
@@ -60,14 +57,13 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         NavigationUI.setupWithNavController(binding.navigationView, navController)
         binding.navigationView.setNavigationItemSelectedListener { item ->
+            binding.drawerLayout.closeDrawers()
             when (item.itemId) {
                 R.id.sign_in_button -> {
-                    binding.drawerLayout.closeDrawers()
                     loaderViewModel.start()
                     startActivityForResult(authViewModel.signInUser(), ActivityResultCodes.SIGN_IN.ordinal)
                 }
                 R.id.sign_out_button -> {
-                    binding.drawerLayout.closeDrawers()
                     authViewModel.signOutUser()
                 }
                 else -> navController.navigate(item.itemId)
@@ -88,20 +84,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUI(authenticationState: AuthenticationState) {
-        when(authenticationState) {
-            AuthenticationState.AUTHENTICATED -> updateDrawer(true)
-            AuthenticationState.UNAUTHENTICATED -> updateDrawer(false)
-        }
-    }
-
-    private fun updateDrawer(authenticated: Boolean) {
+    private fun updateDrawer() {
         binding.apply {
             val menu = navigationView.menu
-            menu.findItem(R.id.sign_out_button).isVisible = authenticated
-            menu.findItem(R.id.history).isVisible = authenticated
-            menu.findItem(R.id.upgrade_account).isVisible = authenticated
-            menu.findItem(R.id.sign_in_button).isVisible = !authenticated
+            menu.findItem(R.id.sign_out_button).isVisible = AuthorizationManager.isAuthenticated()
+            menu.findItem(R.id.history).isVisible = AuthorizationManager.isAuthenticated()
+            menu.findItem(R.id.upgrade_account).isVisible = AuthorizationManager.isAuthenticated() && !AuthorizationManager.isPsychologist()
+            menu.findItem(R.id.sign_in_button).isVisible = !AuthorizationManager.isAuthenticated()
         }
     }
 }

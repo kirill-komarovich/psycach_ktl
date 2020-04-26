@@ -1,13 +1,12 @@
 package com.psycach_ktl.viewmodels
 
 import androidx.lifecycle.*
-import com.google.firebase.auth.FirebaseAuth
 import com.psycach_ktl.entities.FormResult
+import com.psycach_ktl.managers.UserManager
 import com.psycach_ktl.repositories.FormResultRepository
 import kotlinx.coroutines.launch
 
 class ResultViewModel(formResult: FormResult) : ViewModel() {
-    private val auth = FirebaseAuth.getInstance()
     private val formResultRepository = FormResultRepository()
 
     private var _result = MutableLiveData(formResult)
@@ -19,7 +18,7 @@ class ResultViewModel(formResult: FormResult) : ViewModel() {
         get() = _isReady
 
     fun processResult() {
-        val user = auth.currentUser ?: return
+        val user = UserManager.currentUser ?: return
 
         if (result.value!!.isNewRecord()) {
             saveResult(user.uid)

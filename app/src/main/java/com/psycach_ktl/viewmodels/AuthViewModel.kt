@@ -9,12 +9,15 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.*
 import com.psycach_ktl.R
 import com.psycach_ktl.enums.AuthenticationState
+import com.psycach_ktl.managers.UserManager
+import com.psycach_ktl.repositories.UserRepository
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val userRepository = UserRepository()
 
     private val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestIdToken(application.getString(R.string.default_web_client_id))
@@ -37,13 +40,17 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                                         else AuthenticationState.UNAUTHENTICATED
 
         auth.addAuthStateListener { firebaseAuth ->
-            val user = firebaseAuth.currentUser
-            _currentUser.value = user
-            user?.let {
-                _authenticationState.value = AuthenticationState.AUTHENTICATED
-            } ?: run {
-                _authenticationState.value = AuthenticationState.UNAUTHENTICATED
-                _authenticationType.value = null
+            viewModelScope.launch {
+                val user = firebaseAuth.currentUser
+
+                _currentUser.value = user
+                user?.let {
+                    UserManager.currentUserProfile = userRepository.findProfile(it.uid)
+                    _authenticationState.value = AuthenticationState.AUTHENTICATED
+                } ?: run {
+                    _authenticationState.value = AuthenticationState.UNAUTHENTICATED
+                    _authenticationType.value = null
+                }
             }
         }
     }

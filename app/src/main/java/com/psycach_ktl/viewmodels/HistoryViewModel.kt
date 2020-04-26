@@ -3,13 +3,12 @@ package com.psycach_ktl.viewmodels
 import androidx.lifecycle.*
 import androidx.paging.PagedList
 import com.firebase.ui.firestore.paging.FirestorePagingOptions
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
 import com.psycach_ktl.entities.FormResult
+import com.psycach_ktl.managers.UserManager
 import com.psycach_ktl.repositories.FormResultRepository
 
 class HistoryViewModel : ViewModel() {
-    private val auth = FirebaseAuth.getInstance()
     private val formResultRepository = FormResultRepository()
 
     private val pagedListConfig = PagedList.Config.Builder()
@@ -23,7 +22,7 @@ class HistoryViewModel : ViewModel() {
         get() = _listQuery
 
     fun initialQuery(): Query {
-        val userId = auth.currentUser!!.uid
+        val userId = UserManager.currentUser!!.uid
         _listQuery.value = formResultRepository.buildListQuery(listOf(userId))
         return _listQuery.value!!
     }
