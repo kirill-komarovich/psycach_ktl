@@ -25,6 +25,10 @@ class UserRepository : BaseRepository {
         return collection.document(userId).collection(PSYCHOLOGISTS_COLLECTION_NAME).limit(PER_PAGE.toLong())
     }
 
+    fun buildClientsListQuery(userId: String): Query {
+        return collection.document(userId).collection(CLIENTS_COLLECTION_NAME).limit(PER_PAGE.toLong())
+    }
+
     suspend fun addPsychologist(email: String) {
         val data = hashMapOf("email" to email)
 

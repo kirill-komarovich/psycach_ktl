@@ -23,18 +23,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/psychologist_list_item" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_psychologist_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:backgroundTint="@color/colorPrimary"
-            app:tint="@color/colorAccent"
-            style="@style/Widget.MaterialComponents.FloatingActionButton"
-            app:srcCompat="@drawable/ic_baseline_add_24" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

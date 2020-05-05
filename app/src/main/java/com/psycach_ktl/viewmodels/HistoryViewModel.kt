@@ -21,8 +21,7 @@ class HistoryViewModel : ViewModel() {
     val listQuery: LiveData<Query>
         get() = _listQuery
 
-    fun initialQuery(): Query {
-        val userId = UserManager.currentUser!!.uid
+    fun initialQuery(userId: String): Query {
         _listQuery.value = formResultRepository.buildListQuery(listOf(userId))
         return _listQuery.value!!
     }

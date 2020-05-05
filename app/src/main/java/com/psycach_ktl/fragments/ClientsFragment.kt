@@ -8,19 +8,20 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.psycach_ktl.adapters.ClientsAdapter
 import com.psycach_ktl.adapters.PsychologistsAdapter
+import com.psycach_ktl.databinding.ClientsFragmentBinding
 import com.psycach_ktl.databinding.PsychologistsFragmentBinding
+import com.psycach_ktl.viewmodels.ClientsViewModel
 import com.psycach_ktl.viewmodels.PsychologistsViewModel
 
-class PsychologistsFragment: Fragment() {
-    private lateinit var binding: PsychologistsFragmentBinding
-    private val viewModel: PsychologistsViewModel by viewModels()
-    private lateinit var adapter: PsychologistsAdapter
-    private val dialog = AddPsychologistDialogFragment { email ->
-        viewModel.addPsychologist(email)
-    }
-    private val onItemClickListener = PsychologistsAdapter.Listener {
-        viewModel.removePsychologist(it.id)
+class ClientsFragment: Fragment() {
+    private lateinit var binding: ClientsFragmentBinding
+    private val viewModel: ClientsViewModel by viewModels()
+    private lateinit var adapter: ClientsAdapter
+    private val onItemClickListener = ClientsAdapter.Listener {
+        this.findNavController().navigate(ClientsFragmentDirections.actionClientsToHistory(it.id))
     }
 
     override fun onCreateView(
@@ -29,10 +30,9 @@ class PsychologistsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val options = viewModel.buildPagingOptions(viewModel.initialQuery(), viewLifecycleOwner)
-        adapter = PsychologistsAdapter(options, onItemClickListener)
+        adapter = ClientsAdapter(options, onItemClickListener)
 
-        binding = PsychologistsFragmentBinding.inflate(inflater)
-        binding.addPsychologistButton.setOnClickListener { openAddPsychologistDialog() }
+        binding = ClientsFragmentBinding.inflate(inflater)
 
         binding.psychologistsList.adapter = adapter
         binding.lifecycleOwner = this
@@ -43,13 +43,5 @@ class PsychologistsFragment: Fragment() {
             adapter.updateOptions(newOptions)
         })
         return binding.root
-    }
-
-    private fun openAddPsychologistDialog() {
-        dialog.show(parentFragmentManager, DIALOG_TAG)
-    }
-
-    companion object {
-        private const val DIALOG_TAG = "AddPsychologistDialogFragment"
     }
 }

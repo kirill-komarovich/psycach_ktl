@@ -23,6 +23,13 @@
         tools:visible="true" />
 
     <item
+        android:id="@+id/clients"
+        android:icon="@drawable/ic_baseline_people_outline_24"
+        android:title="@string/my_clients"
+        android:visible="false"
+        tools:visible="true" />
+
+    <item
         android:id="@+id/upgrade_account"
         android:icon="@drawable/ic_baseline_add_shopping_cart_24"
         android:title="@string/upgrade_account"

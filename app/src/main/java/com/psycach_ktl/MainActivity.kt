@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.history).isVisible = isAuthenticated
         menu.findItem(R.id.upgrade_account).isVisible = isAuthenticated && !AuthorizationManager.isPsychologist()
         menu.findItem(R.id.psychologists).isVisible = isAuthenticated
+        menu.findItem(R.id.clients).isVisible = isAuthenticated && AuthorizationManager.isPsychologist()
         menu.findItem(R.id.sign_in_button).isVisible = !isAuthenticated
     }
 }

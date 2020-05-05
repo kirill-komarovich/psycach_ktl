@@ -419,6 +419,7 @@
     <string name="upgrade_account">Улучшить аккаунт</string>
     <string name="history_button">История</string>
     <string name="my_psychologists">Мои психологи</string>
+    <string name="my_clients">Мои клиенты</string>
 
     <string name="unknown_user">Неизвестный пользователь</string>
     <string name="user_profile_photo">User Profile Photo</string>

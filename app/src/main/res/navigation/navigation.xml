@@ -69,6 +69,11 @@
         <action
             android:id="@+id/action_history_to_result"
             app:destination="@id/result" />
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/upgrade_account"
@@ -78,4 +83,15 @@
         android:id="@+id/psychologists"
         android:name="com.psycach_ktl.fragments.PsychologistsFragment"
         android:label="@string/my_psychologists" />
+    <fragment
+        android:id="@+id/clients"
+        android:name="com.psycach_ktl.fragments.ClientsFragment"
+        android:label="@string/my_clients" >
+        <action
+            android:id="@+id/action_clients_to_history"
+            app:destination="@id/history" >
+            <argument
+                android:name="userId" />
+        </action>
+    </fragment>
 </navigation>

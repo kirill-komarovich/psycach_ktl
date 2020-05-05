@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.firebase.ui.firestore.paging.LoadingState
 import com.psycach_ktl.adapters.HistoryAdapter
 import com.psycach_ktl.databinding.HistoryFragmentBinding
+import com.psycach_ktl.managers.UserManager
 import com.psycach_ktl.viewmodels.HistoryViewModel
 import com.psycach_ktl.viewmodels.LoaderViewModel
 
@@ -21,6 +22,7 @@ class HistoryFragment : Fragment() {
     private val loaderViewModel: LoaderViewModel by activityViewModels()
     private val viewModel: HistoryViewModel by viewModels()
     private lateinit var adapter: HistoryAdapter
+    private lateinit var userId: String
     private val onItemClickListener = HistoryAdapter.Listener {
         this.findNavController().navigate(
             HistoryFragmentDirections.actionHistoryToResult(formResultParcel = it.toParcel())
@@ -36,6 +38,14 @@ class HistoryFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val args = HistoryFragmentArgs.fromBundle(requireArguments())
+
+        userId = args.userId ?: UserManager.currentUser!!.uid
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(HISTORY_LIST_BUNDLE_KEY, binding.historyList.layoutManager!!.onSaveInstanceState())
@@ -47,7 +57,10 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Log.d("HistoryFragment", savedInstanceState.toString())
-        val options = viewModel.buildPagingOptions(viewModel.initialQuery(), viewLifecycleOwner)
+        val options = viewModel.buildPagingOptions(
+            viewModel.initialQuery(userId),
+            viewLifecycleOwner
+        )
         adapter = HistoryAdapter(options, onItemClickListener, onLoadingStateChangedListener)
         binding = HistoryFragmentBinding.inflate(inflater)
         binding.historyList.layoutManager?.onRestoreInstanceState(savedInstanceState?.getParcelable(HISTORY_LIST_BUNDLE_KEY))
