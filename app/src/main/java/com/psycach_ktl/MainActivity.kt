@@ -27,13 +27,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
-        initLoader()
+        binding.loaderViewModel = loaderViewModel
         initAuth()
         initNavigation()
-    }
-
-    private fun initLoader() {
-        binding.loaderViewModel = loaderViewModel
     }
 
     private fun initAuth() {
@@ -85,12 +81,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateDrawer() {
-        binding.apply {
-            val menu = navigationView.menu
-            menu.findItem(R.id.sign_out_button).isVisible = AuthorizationManager.isAuthenticated()
-            menu.findItem(R.id.history).isVisible = AuthorizationManager.isAuthenticated()
-            menu.findItem(R.id.upgrade_account).isVisible = AuthorizationManager.isAuthenticated() && !AuthorizationManager.isPsychologist()
-            menu.findItem(R.id.sign_in_button).isVisible = !AuthorizationManager.isAuthenticated()
-        }
+        val isAuthenticated = AuthorizationManager.isAuthenticated()
+        val menu = binding.navigationView.menu
+        menu.findItem(R.id.sign_out_button).isVisible = isAuthenticated
+        menu.findItem(R.id.history).isVisible = isAuthenticated
+        menu.findItem(R.id.upgrade_account).isVisible = isAuthenticated && !AuthorizationManager.isPsychologist()
+        menu.findItem(R.id.psychologists).isVisible = isAuthenticated
+        menu.findItem(R.id.sign_in_button).isVisible = !isAuthenticated
     }
 }

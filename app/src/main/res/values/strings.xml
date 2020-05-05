@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name_release" translatable="false">psycach_ktl</string>
-    <string name="app_name_debug" translatable="false">psycach_ktl_debug</string>
+    <string name="app_name_release" translatable="false">Psytester</string>
+    <string name="app_name_debug" translatable="false">Psytester Debug</string>
 
     <string name="san">Самочувствие, активность, настроение</string>
     <string name="mental_states">Cамооценка психических состояний Айзенка</string>
@@ -418,6 +418,7 @@
     <string name="sign_out">Выйти</string>
     <string name="upgrade_account">Улучшить аккаунт</string>
     <string name="history_button">История</string>
+    <string name="my_psychologists">Мои психологи</string>
 
     <string name="unknown_user">Неизвестный пользователь</string>
     <string name="user_profile_photo">User Profile Photo</string>
@@ -430,6 +431,13 @@
     <string name="upgrade_account_pricing">Стоимость улучшения: 5$</string>
     <string name="upgrade_account_accept">Улучшить</string>
     <string name="upgrade_account_success">Вы успешно улучшили аккаунт</string>
+
+    <string name="psychologist_requests">Запросы</string>
+    <string name="psychologist_clients">Клиенты</string>
+    <string name="add_psychologist_form_title">Добавить психолога</string>
+    <string name="add_psychologist_email_input">Введите email</string>
+    <string name="cancel">Отмена</string>
+    <string name="add">Добавить</string>
 
     <string name="dummy_formatted_date">22 апр. 2020 г. 3:12:55 PM</string>
 </resources>

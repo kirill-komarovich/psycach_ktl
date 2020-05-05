@@ -74,4 +74,8 @@
         android:id="@+id/upgrade_account"
         android:name="com.psycach_ktl.fragments.UpgradeAccountFragment"
         android:label="@string/upgrade_account_fragment_label" />
+    <fragment
+        android:id="@+id/psychologists"
+        android:name="com.psycach_ktl.fragments.PsychologistsFragment"
+        android:label="@string/my_psychologists" />
 </navigation>

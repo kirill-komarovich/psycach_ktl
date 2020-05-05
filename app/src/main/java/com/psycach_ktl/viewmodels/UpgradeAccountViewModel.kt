@@ -16,7 +16,7 @@ class UpgradeAccountViewModel : ViewModel() {
 
     fun updateRole() {
         viewModelScope.launch {
-            userRepository.updateUserRole(auth.currentUser!!.uid, UserRoles.PSYCOLOGIST)
+            userRepository.updateUserRole(auth.currentUser!!.uid, UserRoles.PSYCHOLOGIST)
             _isUpgraded.value = true
         }
     }

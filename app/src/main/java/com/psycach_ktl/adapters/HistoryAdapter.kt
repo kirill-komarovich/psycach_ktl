@@ -44,8 +44,8 @@ class HistoryAdapter(
         }
     }
 
-    class Listener(val clickListener: (FormResult: FormResult) -> Unit) {
-        fun onClick(FormResult: FormResult) = clickListener(FormResult)
+    class Listener(val clickListener: (formResult: FormResult) -> Unit) {
+        fun onClick(formResult: FormResult) = clickListener(formResult)
     }
 
     class LoadingStateChangedListener(val loadingStateChangedListener: (state: LoadingState) -> Unit) {

@@ -1,13 +1,14 @@
 package com.psycach_ktl.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.firebase.ui.firestore.paging.LoadingState
 import com.psycach_ktl.adapters.HistoryAdapter
@@ -18,7 +19,7 @@ import com.psycach_ktl.viewmodels.LoaderViewModel
 class HistoryFragment : Fragment() {
     private lateinit var binding: HistoryFragmentBinding
     private val loaderViewModel: LoaderViewModel by activityViewModels()
-    private lateinit var viewModel: HistoryViewModel
+    private val viewModel: HistoryViewModel by viewModels()
     private lateinit var adapter: HistoryAdapter
     private val onItemClickListener = HistoryAdapter.Listener {
         this.findNavController().navigate(
@@ -35,10 +36,9 @@ class HistoryFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable(HISTORY_LIST_BUNDLE_KEY, binding.historyList.layoutManager!!.onSaveInstanceState())
     }
 
     override fun onCreateView(
@@ -46,12 +46,11 @@ class HistoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val options = viewModel.buildPagingOptions(
-            viewModel.initialQuery(),
-            viewLifecycleOwner
-        )
+        Log.d("HistoryFragment", savedInstanceState.toString())
+        val options = viewModel.buildPagingOptions(viewModel.initialQuery(), viewLifecycleOwner)
         adapter = HistoryAdapter(options, onItemClickListener, onLoadingStateChangedListener)
         binding = HistoryFragmentBinding.inflate(inflater)
+        binding.historyList.layoutManager?.onRestoreInstanceState(savedInstanceState?.getParcelable(HISTORY_LIST_BUNDLE_KEY))
         binding.historyList.adapter = adapter
         binding.lifecycleOwner = this
 
@@ -67,5 +66,9 @@ class HistoryFragment : Fragment() {
     private fun hideLoaders() {
         loaderViewModel.stop()
         binding.historyListAdditionalProgressBar.visibility = View.GONE
+    }
+
+    companion object {
+        private const val HISTORY_LIST_BUNDLE_KEY = "historyListState"
     }
 }

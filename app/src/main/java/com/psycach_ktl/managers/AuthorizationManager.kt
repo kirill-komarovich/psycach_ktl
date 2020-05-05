@@ -7,7 +7,7 @@ object AuthorizationManager {
 
     fun isPsychologist(): Boolean {
         return UserManager.currentUserProfile?.let {
-            it.role == UserRoles.PSYCOLOGIST
+            it.role == UserRoles.PSYCHOLOGIST
         } ?: false
     }
 }
