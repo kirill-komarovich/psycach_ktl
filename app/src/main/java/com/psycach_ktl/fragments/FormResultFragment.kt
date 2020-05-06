@@ -51,13 +51,12 @@ abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:FormResul
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.result_menu, menu)
         // check if the activity resolves
         if (getShareIntent().resolveActivity(requireActivity().packageManager) == null) {
             // hide the menu item if it doesn't resolve
             menu.findItem(R.id.share)?.isVisible = false
         }
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.psycach_ktl.R
 import com.psycach_ktl.databinding.ResultFragmentBinding
 import com.psycach_ktl.entities.FormResult
 import com.psycach_ktl.enums.MethodologyTypes
@@ -63,6 +64,12 @@ class ResultFragment : Fragment() {
         fragmentTransaction.add(binding.resultFragmentContainer.id, fragmentFor(formResult))
 
         fragmentTransaction.commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.result_menu, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun fragmentFor(formResult: FormResult): Fragment {
