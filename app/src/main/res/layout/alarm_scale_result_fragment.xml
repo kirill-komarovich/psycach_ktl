@@ -30,10 +30,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:resultLevel="@{viewModel.situationalAnxietyLevel.toLowerCase()}"
-                app:resultKey='@{"situation_anxiety"}'
+                app:resultKey='@{"situational_anxiety"}'
                 app:resultKeyPrefix="@{viewModel.formResult.methodologyType.toLowerCase()}"
                 app:resultValue="@{viewModel.situationalAnxiety}"
-                tools:text="@string/alarm_scale_average_situation_anxiety" />
+                tools:text="@string/alarm_scale_average_situational_anxiety" />
 
             <TextView
                 android:id="@+id/alarm_scale_personal_anxiety_result"

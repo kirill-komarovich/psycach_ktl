@@ -365,9 +365,9 @@
         <item>Почти всегда</item>
     </string-array>
 
-    <string name="alarm_scale_low_situation_anxiety">Низкая ситуативная тревожность (%1$.1f)</string>
-    <string name="alarm_scale_average_situation_anxiety">Средняя ситуативная тревожность (%1$.1f)</string>
-    <string name="alarm_scale_high_situation_anxiety">Высокая ситуативная тревожность (%1$.1f)</string>
+    <string name="alarm_scale_low_situational_anxiety">Низкая ситуативная тревожность (%1$.1f)</string>
+    <string name="alarm_scale_average_situational_anxiety">Средняя ситуативная тревожность (%1$.1f)</string>
+    <string name="alarm_scale_high_situational_anxiety">Высокая ситуативная тревожность (%1$.1f)</string>
     <string name="alarm_scale_low_personal_anxiety">Низкая личностная тревожность (%1$.1f)</string>
     <string name="alarm_scale_average_personal_anxiety">Средняя личностная тревожность (%1$.1f)</string>
     <string name="alarm_scale_high_personal_anxiety">Высокая личностная тревожность (%1$.1f)</string>
@@ -420,6 +420,7 @@
     <string name="history_button">История</string>
     <string name="my_psychologists">Мои психологи</string>
     <string name="my_clients">Мои клиенты</string>
+    <string name="share">Поделиться</string>
 
     <string name="unknown_user">Неизвестный пользователь</string>
     <string name="user_profile_photo">User Profile Photo</string>
