@@ -25,7 +25,7 @@ class AddPsychologistDialogFragment(val onPositive: (email: String) -> Unit) : A
             }
             .create()
 
-        dialog.window?.setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.window?.setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE)
 
         return dialog
     }

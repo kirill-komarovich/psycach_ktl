@@ -34,7 +34,6 @@ abstract class FormResultFragment<BindingT:ViewDataBinding, ViewModelT:FormResul
         viewModelFactoryForm = FormResultViewModel.Factory(formResult)
         viewModel = ViewModelProvider(this, viewModelFactoryForm).get(viewModelClass)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
